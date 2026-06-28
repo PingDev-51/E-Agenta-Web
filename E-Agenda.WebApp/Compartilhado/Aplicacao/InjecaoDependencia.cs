@@ -1,5 +1,4 @@
 using EAgendaWeb.WebApp.Compartilhado.Aplicacao.Logging;
-using EAgendaWeb.WebApp.Modulos.ModuloContato.Aplicacao;
 
 namespace EAgendaWeb.WebApp.Compartilhado.Aplicacao;
 
@@ -12,6 +11,6 @@ public static class InjecaoDependencia
     )
     {
         services.AddSerilogLogger(configuration, logging);
-        services.AddScoped<ServicoContato>();
+        // services.AddScoped<ServicoContato>();
     }
 }

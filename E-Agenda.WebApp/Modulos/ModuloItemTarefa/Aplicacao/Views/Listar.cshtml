@@ -1,0 +1,79 @@
+@using EAgendaWeb.WebApp.Modulos.ModuloItensTarefa.Apresentacao
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Itens da Tarefa";
+}
+
+@model List<ListarItemTarefaViewModel>
+
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3"
+   asp-action="Cadastrar"
+   asp-route-tarefaId="@ViewBag.TarefaId">
+    Novo Item
+</a>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-primary border-start border-primary border-4 rounded-3">
+        Nenhum item cadastrado.
+    </div>
+}
+else
+{
+    <div class="card shadow-sm">
+        <div class="list-group list-group-flush">
+
+            @foreach (var item in Model)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+
+                    <form asp-action="Concluir"
+                          method="post"
+                          class="d-flex align-items-center gap-3">
+
+                        <input type="hidden"
+                               name="Id"
+                               value="@item.Id" />
+
+                        <input type="hidden"
+                               name="Concluido"
+                               value="@(!item.Concluido)" />
+
+                        <input class="form-check-input"
+                               type="checkbox"
+                               onchange="this.form.submit()"
+                               @(item.Concluido ? "checked" : "") />
+
+                        @if (item.Concluido)
+                        {
+                            <span class="text-decoration-line-through text-secondary">
+                                @item.Titulo
+                            </span>
+                        }
+                        else
+                        {
+                            <span>@item.Titulo</span>
+                        }
+
+                    </form>
+
+                    <a class="btn btn-outline-danger btn-sm rounded-pill px-3"
+                       asp-action="Excluir"
+                       asp-route-id="@item.Id">
+                        Excluir
+                    </a>
+
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+<div class="mt-4">
+    <a class="btn btn-outline-primary rounded-pill px-4"
+       asp-controller="Tarefa"
+       asp-action="Listar">
+        Voltar
+    </a>
+</div>

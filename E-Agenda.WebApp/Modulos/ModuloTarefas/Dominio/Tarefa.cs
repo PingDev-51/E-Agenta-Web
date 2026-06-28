@@ -1,4 +1,5 @@
 using EAgendaWeb.WebApp.Compartilhado.Dominio;
+using EAgendaWeb.WebApp.Modulos.ModuloItensTarefa.Dominio;
 
 namespace EAgendaWeb.WebApp.Modulos.ModuloTarefas.Dominio;
 
@@ -16,12 +17,12 @@ public class Tarefa : EntidadeBase<Tarefa>
 
     public int PercentualConcluido { get; set; }
 
-    // public List<ItemTarefa> Itens { get; set; }
+     public List<ItemTarefa> Itens { get; set; }
     
 
     public Tarefa()
     {
-        // Itens = [];
+        Itens = [];
         DataCriacao = DateTime.Now;
     }
 
@@ -32,7 +33,7 @@ public class Tarefa : EntidadeBase<Tarefa>
         DataCriacao = DateTime.Now;
         PercentualConcluido = 0;
         Concluida = false;
-        // Itens = [];
+        Itens = [];
     }
 
     public override void Atualizar(Tarefa tarefaAtualizada)
@@ -42,7 +43,7 @@ public class Tarefa : EntidadeBase<Tarefa>
         DataConclusao = tarefaAtualizada.DataConclusao;
         Concluida = tarefaAtualizada.Concluida;
         PercentualConcluido = tarefaAtualizada.PercentualConcluido;
-        // Itens = tarefaAtualizada.Itens;
+        Itens = tarefaAtualizada.Itens;
     }
 
     public override List<string> Validar()

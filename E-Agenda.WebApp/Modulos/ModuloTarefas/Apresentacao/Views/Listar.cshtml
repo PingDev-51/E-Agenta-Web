@@ -1,0 +1,109 @@
+@using EAgendaWeb.WebApp.Modulos.ModuloTarefas.Apresentacao
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem de Tarefas";
+}
+
+@model List<ListarTarefaViewModel>
+
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3"
+   asp-action="Cadastrar">
+    Cadastrar Nova
+</a>
+
+@if (TempData["MensagemErro"] is string mensagemErro)
+{
+    <div class="alert alert-danger border-start border-danger border-4 rounded-3">
+        @mensagemErro
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-primary border-start border-primary border-4 rounded-3">
+        Nenhuma tarefa cadastrada.
+    </div>
+}
+else
+{
+    @foreach (var grupo in Model.OrderBy(t => t.Prioridade).GroupBy(t => t.Prioridade))
+    {
+        <h3 class="mt-4 mb-3 border-bottom pb-2">
+            Prioridade: @grupo.Key
+        </h3>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+            @foreach (var t in grupo)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <h5 class="card-title mb-0">@t.Titulo</h5>
+
+                                <span class="badge text-bg-primary rounded-pill">
+                                    @t.Id.ToString().Substring(0,8)
+                                </span>
+                            </div>
+
+                            <dl class="row g-2 mb-4">
+
+                                <dt class="col-6 text-secondary fw-semibold">
+                                    Prioridade
+                                </dt>
+                                <dd class="col-6 mb-0">
+                                    @t.Prioridade
+                                </dd>
+
+                                <dt class="col-6 text-secondary fw-semibold">
+                                    Criação
+                                </dt>
+                                <dd class="col-6 mb-0">
+                                    @t.DataCriacao.ToString("dd/MM/yyyy")
+                                </dd>
+
+                                <dt class="col-6 text-secondary fw-semibold">
+                                    Concluída
+                                </dt>
+                                <dd class="col-6 mb-0">
+                                    @(t.Concluida ? "Sim" : "Não")
+                                </dd>
+
+                                <dt class="col-6 text-secondary fw-semibold">
+                                    Progresso
+                                </dt>
+                                <dd class="col-6 mb-0">
+                                    @t.PercentualConcluido%
+                                </dd>
+
+                            </dl>
+
+                            <div class="progress mb-3" style="height: 8px;">
+                                <div class="progress-bar"
+                                     role="progressbar"
+                                     style="width:@t.PercentualConcluido%">
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                                   asp-action="Editar"
+                                   asp-route-id="@t.Id">
+                                    Editar
+                                </a>
+
+                                <a class="btn btn-outline-danger btn-sm rounded-pill px-3"
+                                   asp-action="Excluir"
+                                   asp-route-id="@t.Id">
+                                    Excluir
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

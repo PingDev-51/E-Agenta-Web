@@ -17,6 +17,7 @@ public class Tarefa : EntidadeBase<Tarefa>
     public int PercentualConcluido { get; set; }
 
     // public List<ItemTarefa> Itens { get; set; }
+    
 
     public Tarefa()
     {

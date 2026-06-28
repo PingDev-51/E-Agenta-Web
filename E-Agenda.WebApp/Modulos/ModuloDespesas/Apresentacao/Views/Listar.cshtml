@@ -1,0 +1,95 @@
+@using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Apresentacao
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem de Despesas";
+}
+
+@model List<ListarDespesaViewModel>
+
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3"
+   asp-action="Cadastrar">
+    Cadastrar Nova
+</a>
+
+@if (TempData["MensagemErro"] is string mensagemErro)
+{
+    <div class="alert alert-danger border-start border-danger border-4 rounded-3">
+        @mensagemErro
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-primary border-start border-primary border-4 rounded-3">
+        Nenhuma despesa cadastrada.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+
+        @foreach (var d in Model.OrderByDescending(x => x.DataOcorrencia))
+        {
+            <div class="col">
+
+                <div class="card h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+
+                            <h5 class="card-title mb-0">@d.Descricao</h5>
+
+                            <span class="badge text-bg-primary rounded-pill">
+                                @d.Id.ToString().Substring(0,8)
+                            </span>
+
+                        </div>
+
+                        <dl class="row">
+
+                            <dt class="col-5 text-secondary">Valor</dt>
+                            <dd class="col-7">
+                                @d.Valor.ToString("C")
+                            </dd>
+
+                            <dt class="col-5 text-secondary">Pagamento</dt>
+                            <dd class="col-7">
+                                @d.FormaPagamento
+                            </dd>
+
+                            <dt class="col-5 text-secondary">Data</dt>
+                            <dd class="col-7">
+                                @d.DataOcorrencia.ToString("dd/MM/yyyy")
+                            </dd>
+
+                            @*
+                            <dt class="col-5 text-secondary">Categorias</dt>
+                            <dd class="col-7">
+                                @string.Join(", ", d.Categorias)
+                            </dd>
+                            *@
+
+                        </dl>
+
+                        <div class="d-flex justify-content-end gap-2">
+
+                            <a asp-action="Editar"
+                               asp-route-id="@d.Id"
+                               class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                Editar
+                            </a>
+
+                            <a asp-action="Excluir"
+                               asp-route-id="@d.Id"
+                               class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

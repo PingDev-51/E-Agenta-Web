@@ -15,7 +15,7 @@ public class ServicoContato
         this.repositorioContato = repositorioContato;
     }
 
-    public Result Cadastrar(CadastrarContatosContatosDto dto)
+    public Result Cadastrar(CadastrarContatosDto dto)
     {
         if (ExisteDuplicacao(dto.Email, dto.Telefone))
             return Falha("Informação duplicada", "Já existe um contato com este telefone ou email");
@@ -32,19 +32,42 @@ public class ServicoContato
 
         return Result.Ok();
     }
-    public Result Editar()
+    public Result Editar(EditarContatosDto dto)
     {
+        if (ExisteDuplicacao(dto.Email, dto.Telefone, dto.Id))
+            return Falha("Informação duplicada", "Já existe um contato com este telefone ou email");
 
+        Contatos ContatoAtualizado = new Contatos(
+            dto.Nome,
+            dto.Email,
+            dto.Telefone,
+            dto.Cargo,
+            dto.Empresa
+        );
+
+        bool conseguiuEditar = repositorioContato.Editar(dto.Id, ContatoAtualizado);
+
+        if (!conseguiuEditar)
+            return Result.Fail("Contato nçao encontrado");
+
+        return Result.Ok();
     }
-    public Result Excluir()
+    public Result Excluir(Guid id)
     {
+        Contatos? contato = repositorioContato.SelecionarPorId(id);
 
+        if (contato == null)
+            return Result.Fail("Contato não encontrado");
+
+        repositorioContato.Excluir(contato.Id);
+
+        return Result.Ok();
     }
-    public List<ListarContatosContatosDto> SelecionarTodos()
+    public List<ListarContatosDto> SelecionarTodos()
     {
         List<Contatos> contatos = repositorioContato.SelecionarTodos();
 
-        return contatos.Select(c => new ListarContatosContatosDto(
+        return contatos.Select(c => new ListarContatosDto(
             c.Id,
             c.Nome,
             c.Email,
@@ -53,21 +76,32 @@ public class ServicoContato
             c.Empresa
         )).ToList();
     }
-    public Result SelecionarPorId()
+    public Result<DetalhesContatosDto> SelecionarPorId(Guid id)
     {
+        Contatos? contato = repositorioContato.SelecionarPorId(id);
 
+        if (contato == null)
+            return Result.Fail("Contato não encontrado");
+
+        return Result.Ok(new DetalhesContatosDto(
+            contato.Nome,
+            contato.Email,
+            contato.Telefone,
+            contato.Cargo,
+            contato.Empresa
+        ));
     }
 
-    private bool ExisteDuplicacao(string email, string telefone, string? idIgnirado = null)
+    private bool ExisteDuplicacao(string email, string telefone, Guid? idIgnorado = null)
     {
         List<Contatos> contatos = repositorioContato.SelecionarTodos();
 
         foreach (Contatos c in contatos)
         {
-            if (string.Equals(c.Email, email, StringComparison.OrdinalIgnoreCase))
+            if (c.Id != idIgnorado && string.Equals(c.Email, email, StringComparison.OrdinalIgnoreCase))
                 return true;
 
-            if (string.Equals(c.Telefone, telefone))
+            if (c.Id != idIgnorado && string.Equals(c.Telefone, telefone))
                 return true;
         }
 

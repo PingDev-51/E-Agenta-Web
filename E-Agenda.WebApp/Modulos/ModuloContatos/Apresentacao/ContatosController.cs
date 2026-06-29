@@ -18,7 +18,7 @@ public class ContatosController : Controller
 
     public ActionResult Listar()
     {
-        List<ListarContatosContatosDto> dtos = servicoContato.SelecionarTodos();
+        List<ListarContatosDto> dtos = servicoContato.SelecionarTodos();
 
         List<ListarContatosContatosViewModels> listarVm = dtos.Select(c => new ListarContatosContatosViewModels(
             c.Id,
@@ -53,7 +53,7 @@ public class ContatosController : Controller
         if (!ModelState.IsValid)
             return View(cadastrarVm);
 
-        CadastrarContatosContatosDto dto = new CadastrarContatosContatosDto(
+        CadastrarContatosDto dto = new CadastrarContatosDto(
             cadastrarVm.Nome,
             cadastrarVm.Email,
             cadastrarVm.Telefone,
@@ -79,11 +79,91 @@ public class ContatosController : Controller
     }
 
     [HttpGet]
-    public ActionResult Editar()
+    public ActionResult Editar(Guid id)
     {
+        Result<DetalhesContatosDto> resultado = servicoContato.SelecionarPorId(id);
 
+        if (resultado.IsFailed)
+        {
+            TempData["ErrorMessage"] = resultado.Errors.First().Message;
 
-        return View();
+            return RedirectToAction(nameof(Listar));
+        }
+
+        DetalhesContatosDto dto = resultado.Value;
+
+        EditarContatosViwModel editarVm = new EditarContatosViwModel(
+            id,
+            dto.Nome,
+            dto.Email,
+            dto.Telefone,
+            dto.Cargo,
+            dto.Empresa
+        );
+
+        return View(editarVm);
     }
 
+
+    [HttpPost]
+    public ActionResult Editar(EditarContatosViwModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        Result resultado = servicoContato.Editar(new EditarContatosDto(
+            editarVm.Id,
+            editarVm.Nome,
+            editarVm.Email,
+            editarVm.Telefone,
+            editarVm.Cargo,
+            editarVm.Empresa
+        ));
+
+        if (resultado.IsFailed)
+        {
+            foreach (IError erro in resultado.Errors) // aqui vamos percorrer todos os erros
+            {
+                string? campo = erro.Metadata["Campo"] is string ? erro.Metadata["Campo"].ToString()! : string.Empty; // se esse valor for uma string retornamos como uma formatado como string se nao retorna uma string vazia
+
+                ModelState.AddModelError(campo, erro.Message); // aqui estamos mostrando a mensagem de erro e o campo que deu erro
+            }
+
+            return View(editarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+    [HttpGet]
+    public ActionResult Excluir(Guid id)
+    {
+        Result<DetalhesContatosDto> resultado = servicoContato.SelecionarPorId(id);
+
+        DetalhesContatosDto dto = resultado.Value;
+
+        ExcluirContatosViwModel excluirVm = new ExcluirContatosViwModel(
+            id,
+            dto.Nome,
+            dto.Email,
+            dto.Telefone,
+            dto.Cargo,
+            dto.Empresa
+        );
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(ExcluirContatosViwModel excluirVm)
+    {
+        Result resultado = servicoContato.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+        {
+            TempData["ErrorMessage"] = resultado.Errors.First().Message;
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

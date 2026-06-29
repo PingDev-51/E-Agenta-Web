@@ -12,6 +12,8 @@ public class Contatos : EntidadeBase<Contatos>
     public string Cargo { get; set; } = string.Empty;
     public string Empresa { get; set; } = string.Empty;
 
+    //Adicionar um compromisso
+
 
     public Contatos(string nome, string email, string telefone, string cargo = null, string empresa = null)
     {

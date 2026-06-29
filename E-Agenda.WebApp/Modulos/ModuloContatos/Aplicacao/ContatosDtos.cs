@@ -2,7 +2,7 @@ using System;
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
 
-public record ListarContatosContatosDto(
+public record ListarContatosDto(
     Guid Id,
     string Nome,
     string Email,
@@ -10,14 +10,14 @@ public record ListarContatosContatosDto(
     string Cargo,
     string Empresa
 );
-public record CadastrarContatosContatosDto(
+public record CadastrarContatosDto(
     string Nome,
     string Email,
     string Telefone,
     string Cargo,
     string Empresa
 );
-public record EditarContatosContatosDto(
+public record EditarContatosDto(
     Guid Id,
     string Nome,
     string Email,
@@ -25,8 +25,7 @@ public record EditarContatosContatosDto(
     string Cargo,
     string Empresa
 );
-public record ExcluirContatosContatosDto(
-    Guid Id,
+public record DetalhesContatosDto(
     string Nome,
     string Email,
     string Telefone,

@@ -4,7 +4,7 @@ using EAgendaWeb.WebApp.Compartilhado.Infra.Sql;
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Infra;
 
-public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioContatos
+public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioContatos // terminar as aulas e ver como fasso o repositorio SQL
 {
     public void Cadastrar(Contatos entidade)
     {

@@ -1,8 +1,8 @@
 using System;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Infra;
+using EAgendaWeb.WebApp.Compartilhado.Apresentacao.Extensions;
 using FluentResults;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Apresentacao;
@@ -10,24 +10,19 @@ namespace E_Agenda.WebApp.Modulos.ModuloContatos.Apresentacao;
 public class ContatosController : Controller
 {
     private readonly ServicoContato servicoContato;
+    private readonly IMapper mapeador;
 
-    public ContatosController(ServicoContato servicoContato)
+    public ContatosController(ServicoContato servicoContato, IMapper mapeador)
     {
         this.servicoContato = servicoContato;
+        this.mapeador = mapeador;
     }
 
     public ActionResult Listar()
     {
         List<ListarContatosDto> dtos = servicoContato.SelecionarTodos();
 
-        List<ListarContatosContatosViewModels> listarVm = dtos.Select(c => new ListarContatosContatosViewModels(
-            c.Id,
-            c.Nome,
-            c.Email,
-            c.Telefone,
-            c.Cargo,
-            c.Empresa
-        )).ToList();
+        List<ListarContatosViewModel> listarVm = mapeador.Map<List<ListarContatosViewModel>>(dtos);
 
         return View(listarVm);
     }
@@ -35,7 +30,7 @@ public class ContatosController : Controller
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        CadastrarContatosContatosViewModels cadastrarVm = new CadastrarContatosContatosViewModels(
+        CadastrarContatosViewModel cadastrarVm = new CadastrarContatosViewModel(
             string.Empty,
             string.Empty,
             string.Empty,
@@ -48,29 +43,18 @@ public class ContatosController : Controller
 
 
     [HttpPost]
-    public ActionResult Cadastrar(CadastrarContatosContatosViewModels cadastrarVm)
+    public ActionResult Cadastrar(CadastrarContatosViewModel cadastrarVm)
     {
         if (!ModelState.IsValid)
             return View(cadastrarVm);
 
-        CadastrarContatosDto dto = new CadastrarContatosDto(
-            cadastrarVm.Nome,
-            cadastrarVm.Email,
-            cadastrarVm.Telefone,
-            cadastrarVm.Cargo,
-            cadastrarVm.Empresa
-        );
+        CadastrarContatosDto dto = mapeador.Map<CadastrarContatosDto>(cadastrarVm);
 
         Result resultado = servicoContato.Cadastrar(dto);
 
         if (resultado.IsFailed)
         {
-            foreach (IError erro in resultado.Errors) // percorrendo o erro
-            {
-                string? campo = erro.Metadata["Campo"] is string ? erro.Metadata["Campo"].ToString()! : string.Empty; // se for string entao me de campo.String se nao retorne uma  string vaazia
-
-                ModelState.AddModelError(campo, erro.Message); // apresenta a mensagem de erro caso exista
-            }
+            ModelState.AddModelError(resultado);
 
             return View(cadastrarVm);
         }
@@ -85,49 +69,32 @@ public class ContatosController : Controller
 
         if (resultado.IsFailed)
         {
-            TempData["ErrorMessage"] = resultado.Errors.First().Message;
+            TempData.AddErrorMessage(resultado);
 
             return RedirectToAction(nameof(Listar));
         }
 
         DetalhesContatosDto dto = resultado.Value;
 
-        EditarContatosViwModel editarVm = new EditarContatosViwModel(
-            id,
-            dto.Nome,
-            dto.Email,
-            dto.Telefone,
-            dto.Cargo,
-            dto.Empresa
-        );
+        EditarContatosViewModel editarVm = mapeador.Map<EditarContatosViewModel>(dto);
 
         return View(editarVm);
     }
 
 
     [HttpPost]
-    public ActionResult Editar(EditarContatosViwModel editarVm)
+    public ActionResult Editar(EditarContatosViewModel editarVm)
     {
         if (!ModelState.IsValid)
             return View(editarVm);
 
-        Result resultado = servicoContato.Editar(new EditarContatosDto(
-            editarVm.Id,
-            editarVm.Nome,
-            editarVm.Email,
-            editarVm.Telefone,
-            editarVm.Cargo,
-            editarVm.Empresa
-        ));
+        EditarContatosDto dto = mapeador.Map<EditarContatosDto>(editarVm);
+
+        Result resultado = servicoContato.Editar(dto);
 
         if (resultado.IsFailed)
         {
-            foreach (IError erro in resultado.Errors) // aqui vamos percorrer todos os erros
-            {
-                string? campo = erro.Metadata["Campo"] is string ? erro.Metadata["Campo"].ToString()! : string.Empty; // se esse valor for uma string retornamos como uma formatado como string se nao retorna uma string vazia
-
-                ModelState.AddModelError(campo, erro.Message); // aqui estamos mostrando a mensagem de erro e o campo que deu erro
-            }
+            ModelState.AddModelError(resultado);
 
             return View(editarVm);
         }
@@ -142,26 +109,21 @@ public class ContatosController : Controller
 
         DetalhesContatosDto dto = resultado.Value;
 
-        ExcluirContatosViwModel excluirVm = new ExcluirContatosViwModel(
-            id,
-            dto.Nome,
-            dto.Email,
-            dto.Telefone,
-            dto.Cargo,
-            dto.Empresa
-        );
+        ExcluirContatosViewModel excluirVm = mapeador.Map<ExcluirContatosViewModel>(dto);
 
         return View(excluirVm);
     }
 
     [HttpPost]
-    public ActionResult Excluir(ExcluirContatosViwModel excluirVm)
+    public ActionResult Excluir(ExcluirContatosViewModel excluirVm)
     {
         Result resultado = servicoContato.Excluir(excluirVm.Id);
 
+        //fazer a validação para não excluir um obejeto que tenha compromissos cadastradaos
+
         if (resultado.IsFailed)
         {
-            TempData["ErrorMessage"] = resultado.Errors.First().Message;
+            TempData.AddErrorMessage(resultado);
         }
 
         return RedirectToAction(nameof(Listar));

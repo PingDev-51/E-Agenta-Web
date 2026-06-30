@@ -118,6 +118,21 @@ public class CompromissosControllers : Controller
         return View(excluirVm);
     }
 
+    [HttpPost]
+    public ActionResult Excluir(ExcluirCompromissosDto excluirVm)
+    {
+        Result resultado = servicoCompromisso.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(excluirVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<OpcaoContatoViewModels> SelecionarContatos()
     {
         List<OpcaoContatoDto> contatos = servicoCompromisso.SelecionarContatos();

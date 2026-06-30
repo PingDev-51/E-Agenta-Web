@@ -119,7 +119,7 @@ public class CategoriaController : Controller
     }
 
 
-    [HttpGet]
+    [HttpPost]
     public ActionResult Excluir(ExcluirCategoriaViewModel excluirVm)
     {
         Result resultado = servicoCategoria.Excluir(excluirVm.Id);

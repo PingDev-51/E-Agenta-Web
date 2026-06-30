@@ -1,11 +1,17 @@
 using System;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using EAgendaWeb.WebApp.Compartilhado.Infra.Sql;
+using Microsoft.Data.SqlClient;
+
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Infra;
 
 public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioContatos // terminar as aulas e ver como fasso o repositorio SQL
 {
+    private const string InserirSql = """ 
+        
+    """;
+
     public void Cadastrar(Contatos entidade)
     {
         throw new NotImplementedException();

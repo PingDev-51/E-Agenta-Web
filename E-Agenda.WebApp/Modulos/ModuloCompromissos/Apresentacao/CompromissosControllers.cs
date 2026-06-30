@@ -106,11 +106,7 @@ public class CompromissosControllers : Controller
         return RedirectToAction(nameof(Listar));
     }
 
-<<<<<<< HEAD
-    [HttpPost]
-=======
     [HttpGet]
->>>>>>> ModuloCategoria
     public ActionResult Excluir(Guid id)
     {
         Result<DetalhesCompromissosDto> resultado = servicoCompromisso.SelecionarPorId(id);

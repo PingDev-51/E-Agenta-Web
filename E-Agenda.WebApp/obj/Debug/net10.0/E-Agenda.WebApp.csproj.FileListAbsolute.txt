@@ -79,3 +79,16 @@ C:\Users\kauan\Documents\Academia-Do-Programador-FullStack\Atividades\E-Agenda20
 C:\Users\kauan\Documents\Academia-Do-Programador-FullStack\Atividades\E-Agenda2026\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.pdb
 C:\Users\kauan\Documents\Academia-Do-Programador-FullStack\Atividades\E-Agenda2026\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.genruntimeconfig.cache
 C:\Users\kauan\Documents\Academia-Do-Programador-FullStack\Atividades\E-Agenda2026\E-Agenda.WebApp\obj\Debug\net10.0\ref\E-Agenda.WebApp.dll
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.csproj.AssemblyReference.cache
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.AssemblyInfoInputs.cache
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.AssemblyInfo.cs
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.csproj.CoreCompileInputs.cache
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.RazorAssemblyInfo.cache
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.RazorAssemblyInfo.cs
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.sourcelink.json
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.dll
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\refint\E-Agenda.WebApp.dll
+C:\Users\kauan\Documents\CursoADP\Modulo4\E-Agenda-Web\E-Agenda.WebApp\obj\Debug\net10.0\E-Agenda.WebApp.pdb

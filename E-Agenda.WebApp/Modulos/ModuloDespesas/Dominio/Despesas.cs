@@ -1,3 +1,4 @@
+using E_Agenda.WebApp.Modulos.ModuloCategoria.Dominio;
 using EAgendaWeb.WebApp.Compartilhado.Dominio;
 
 namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
@@ -12,7 +13,7 @@ public class Despesas : EntidadeBase<Despesas>
 
     public FormaPagamento FormaPagamento { get; set; }
 
-    // public List<Categoria> Categorias { get; set; }
+    public Categoria? Categorias { get; set; } = null;
 
     public Despesas()
     {

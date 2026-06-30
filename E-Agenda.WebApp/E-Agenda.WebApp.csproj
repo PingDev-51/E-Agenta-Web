@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Modulos\ModuloCompromissos\" />
+    <Folder Include="Modulos\ModuloCompromissos\Aplicacao\" />
+    <Folder Include="Modulos\ModuloCompromissos\Apresentacao\" />
+    <Folder Include="Modulos\ModuloCompromissos\Apresentacao\Views\" />
+    <Folder Include="Modulos\ModuloCompromissos\Dominio\" />
+    <Folder Include="Modulos\ModuloCompromissos\Infra\" />
     <Folder Include="Modulos\ModuloContatos\" />
     <Folder Include="Modulos\ModuloContatos\Aplicacao\" />
     <Folder Include="Modulos\ModuloContatos\Apresentacao\" />

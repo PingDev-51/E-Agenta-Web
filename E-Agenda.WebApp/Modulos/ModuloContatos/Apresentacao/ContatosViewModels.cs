@@ -14,24 +14,29 @@ public record ListarContatosViewModel(
 
 public record CadastrarContatosViewModel(
     [Required (ErrorMessage = "O campo Nome Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Nome deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Nome deve conter entre 2 a 100 caracteres")]
     string Nome,
 
     [Required (ErrorMessage = "O campo Email Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Email deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Email deve conter entre 2 a 100 caracteres")]
     [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
     string Email,
 
     [Required (ErrorMessage = "O campo Telefone Deve ser preenchido")]
-    [StringLength(12, MinimumLength = 11, ErrorMessage = "O campo Telefone deve conter entre 11 a 12 caracteres")]
+    [StringLength(12, MinimumLength = 11,
+        ErrorMessage = "O campo Telefone deve conter entre 11 a 12 caracteres")]
     string Telefone,
 
     [Required (ErrorMessage = "O campo Cargo Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Cargo deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Cargo deve conter entre 2 a 100 caracteres")]
     string Cargo,
 
     [Required (ErrorMessage = "O campo Empresa Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Empresa deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Empresa deve conter entre 2 a 100 caracteres")]
     string Empresa
 );
 
@@ -39,25 +44,30 @@ public record EditarContatosViewModel(
     Guid Id,
 
     [Required (ErrorMessage = "O campo Nome Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Nome deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Nome deve conter entre 2 a 100 caracteres")]
     string Nome,
 
     [Required (ErrorMessage = "O campo Email Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Email deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Email deve conter entre 2 a 100 caracteres")]
     [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
     string Email,
 
     [Required (ErrorMessage = "O campo Telefone Deve ser preenchido")]
-    [StringLength(12, MinimumLength = 11, ErrorMessage = "O campo Telefone deve conter entre 11 a 12 caracteres")]
+    [StringLength(12, MinimumLength = 11,
+        ErrorMessage = "O campo Telefone deve conter entre 11 a 12 caracteres")]
     // [RegularExpression]
     string Telefone,
 
     [Required (ErrorMessage = "O campo Cargo Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Cargo deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Cargo deve conter entre 2 a 100 caracteres")]
     string Cargo,
 
     [Required (ErrorMessage = "O campo Empresa Deve ser preenchido")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo Empresa deve conter entre 2 a 100 caracteres")]
+    [StringLength(100, MinimumLength = 2,
+        ErrorMessage = "O campo Empresa deve conter entre 2 a 100 caracteres")]
     string Empresa
 );
 

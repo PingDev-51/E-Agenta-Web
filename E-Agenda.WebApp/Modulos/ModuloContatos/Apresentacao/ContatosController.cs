@@ -107,6 +107,11 @@ public class ContatosController : Controller
     {
         Result<DetalhesContatosDto> resultado = servicoContato.SelecionarPorId(id);
 
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+        }
+
         DetalhesContatosDto dto = resultado.Value;
 
         ExcluirContatosViewModel excluirVm = mapeador.Map<ExcluirContatosViewModel>(dto);
@@ -118,8 +123,6 @@ public class ContatosController : Controller
     public ActionResult Excluir(ExcluirContatosViewModel excluirVm)
     {
         Result resultado = servicoContato.Excluir(excluirVm.Id);
-
-        //fazer a validação para não excluir um obejeto que tenha compromissos cadastradaos
 
         if (resultado.IsFailed)
         {

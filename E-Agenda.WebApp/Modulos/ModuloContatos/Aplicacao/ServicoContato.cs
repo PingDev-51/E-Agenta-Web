@@ -3,16 +3,19 @@ using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using FluentResults;
+using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
 
 public class ServicoContato
 {
     private readonly IRepositorioContatos repositorioContato;
+    private readonly IRepositorioCompromissos repositorioCompromisso;
 
-    public ServicoContato(IRepositorioContatos repositorioContato)
+    public ServicoContato(IRepositorioContatos repositorioContato, IRepositorioCompromissos repositorioCompromisso)
     {
         this.repositorioContato = repositorioContato;
+        this.repositorioCompromisso = repositorioCompromisso;
     }
 
     public Result Cadastrar(CadastrarContatosDto dto)
@@ -58,6 +61,14 @@ public class ServicoContato
 
         if (contato == null)
             return Result.Fail("Contato não encontrado");
+
+        List<Compromissos> compromissos = repositorioCompromisso.SelecionarTodos();
+
+        foreach (Compromissos c in compromissos)
+        {
+            if (string.Equals(c.Contato!.Id, id))
+                return Result.Fail("Este contato não pode ser excluido pois está relacionado a um compromisso");
+        }
 
         repositorioContato.Excluir(contato.Id);
 

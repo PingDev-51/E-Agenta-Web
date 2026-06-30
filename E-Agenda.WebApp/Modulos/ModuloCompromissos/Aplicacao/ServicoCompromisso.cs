@@ -24,17 +24,35 @@ public class ServicoCompromisso
         if (contatoSelecionado == null)
             return Falha("Não foi possivel encontrar um contato", "contato");
 
-        Compromissos novoCompromisso = new Compromissos(
-            dto.Assunto,
-            dto.HoraDeInicio,
-            dto.HoraDeTermino,
-            dto.TipoDeCompromisso,
-            dto.Local,
-            dto.Link,
-            contatoSelecionado!
-        );
+        // implementar logica de apresentação para tipo de compromisso
 
-        repositorioCompromissos.Cadastrar(novoCompromisso);
+        if (!ERemoto(dto)) // testar se a logica deu certo
+        {
+            Compromissos novoCompromisso = new Compromissos(
+                dto.Assunto,
+                dto.HoraDeInicio,
+                dto.HoraDeTermino,
+                dto.TipoDeCompromisso,
+                dto.Local,
+                contato: contatoSelecionado!
+            );
+
+            repositorioCompromissos.Cadastrar(novoCompromisso);
+        }
+        else
+        {
+            Compromissos novoCompromisso = new Compromissos(
+                dto.Assunto,
+                dto.HoraDeInicio,
+                dto.HoraDeTermino,
+                dto.TipoDeCompromisso,
+                dto.Link,
+                contato: contatoSelecionado!
+            );
+
+            repositorioCompromissos.Cadastrar(novoCompromisso);
+        }
+
 
         return Result.Ok();
     }
@@ -127,5 +145,15 @@ public class ServicoCompromisso
         return contatos
             .Select(contatos => new OpcaoContatoDto(contatos.Id, contatos.Nome))
             .ToList();
+    }
+
+    private bool ERemoto(CadastrarCompromissosDto dto)
+    {
+        List<Compromissos> compromissos = repositorioCompromissos.SelecionarTodos();
+
+        if (dto.TipoDeCompromisso == TipoCompromisso.Remoto)
+            return true;
+
+        return false;
     }
 }

@@ -48,7 +48,7 @@ public class ServicoContato
         bool conseguiuEditar = repositorioContato.Editar(dto.Id, ContatoAtualizado);
 
         if (!conseguiuEditar)
-            return Result.Fail("Contato nçao encontrado");
+            return Result.Fail("Contato nao encontrado");
 
         return Result.Ok();
     }

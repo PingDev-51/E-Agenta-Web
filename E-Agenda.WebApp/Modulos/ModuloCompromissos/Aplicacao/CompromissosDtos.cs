@@ -26,6 +26,42 @@ public record CadastrarCompromissosDto(
     List<OpcaoContatoDto> Contato
 );
 
+public record EditarCompromissosDto(
+    Guid Id,
+    string Assunto,
+    DateTime HoraDeInicio,
+    DateTime HoraDeTermino,
+    TipoCompromisso TipoDeCompromisso,
+    string Local,
+    string Link,
+    Guid contatoId,
+    List<OpcaoContatoDto> Contato
+);
+
+public record ExcluirCompromissosDto(
+    Guid Id,
+    string Assunto,
+    DateTime HoraDeInicio,
+    DateTime HoraDeTermino,
+    TipoCompromisso TipoDeCompromisso,
+    string Local,
+    string Link,
+    Guid contatoId,
+    List<OpcaoContatoDto> Contato
+);
+
+public record DetalhesCompromissosDto(
+    string Assunto,
+    DateTime DataOcorrencia,
+    DateTime HoraDeIncio,
+    DateTime HoraDeTermino,
+    TipoCompromisso TipoDeCompromisso,
+    string Local,
+    string Link,
+    Guid contatoId,
+    List<OpcaoContatoDto> Contato
+);
+
 public record OpcaoContatoDto(
     Guid Id,
     string Nome

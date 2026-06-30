@@ -67,6 +67,57 @@ public class CompromissosControllers : Controller
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesCompromissosDto> resultado = servicoCompromisso.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        DetalhesCompromissosDto dto = resultado.Value;
+
+        EditarCompromissosViewModels editarVm = mapeador.Map<EditarCompromissosViewModels>(dto);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarCompromissosViewModels editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        EditarCompromissosDto dto = mapeador.Map<EditarCompromissosDto>(editarVm);
+
+        Result resultado = servicoCompromisso.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(Guid id)
+    {
+        Result<DetalhesCompromissosDto> resultado = servicoCompromisso.SelecionarPorId(id);
+
+        DetalhesCompromissosDto dto = resultado.Value;
+
+        ExcluirCompromissosViewModels excluirVm = mapeador.Map<ExcluirCompromissosViewModels>(dto);
+
+        return View(excluirVm);
+    }
+
     private List<OpcaoContatoViewModels> SelecionarContatos()
     {
         List<OpcaoContatoDto> contatos = servicoCompromisso.SelecionarContatos();

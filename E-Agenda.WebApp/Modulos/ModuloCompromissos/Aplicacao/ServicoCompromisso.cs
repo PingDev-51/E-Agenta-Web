@@ -39,19 +39,61 @@ public class ServicoCompromisso
         return Result.Ok();
     }
 
-    public Result Editar()
+    public Result Editar(EditarCompromissosDto dto)
     {
-        throw new NotImplementedException();
+        Contatos? contatoSelecionado = repositorioContatos.SelecionarPorId(dto.contatoId);
+
+        if (contatoSelecionado == null)
+            return Falha("Não foi possivel encontrar um contato", "contato");
+
+        Compromissos compromissoAtualizado = new Compromissos(
+            dto.Assunto,
+            dto.HoraDeInicio,
+            dto.HoraDeTermino,
+            dto.TipoDeCompromisso,
+            dto.Local,
+            dto.Link,
+            contatoSelecionado!
+        );
+
+        bool conseguiuEditar = repositorioCompromissos.Editar(dto.Id, compromissoAtualizado);
+
+        if (!conseguiuEditar)
+            return Result.Fail("Contato nao encontrado");
+
+        return Result.Ok();
     }
 
-    public Result Excluir()
+    public Result Excluir(Guid id)
     {
-        throw new NotImplementedException();
+        Compromissos? compromissos = repositorioCompromissos.SelecionarPorId(id);
+
+        if (compromissos == null)
+            return Result.Fail("Compromissos não encontrado");
+
+        repositorioCompromissos.Excluir(compromissos.Id);
+
+        return Result.Ok();
     }
 
-    public Result SelecionarPorId()
+    public Result<DetalhesCompromissosDto> SelecionarPorId(Guid id)
     {
-        throw new NotImplementedException();
+        Compromissos? compromissos = repositorioCompromissos.SelecionarPorId(id);
+
+        if (compromissos == null)
+            return Result.Fail("Compromissos não encontrado");
+
+        return Result.Ok(new DetalhesCompromissosDto(
+            compromissos.Assunto,
+            compromissos.DataOcorrencia,
+            compromissos.HoraDeInicio,
+            compromissos.HoraDeTermino,
+            compromissos.TipoDeCompromisso,
+            compromissos.Local,
+            compromissos.Link,
+            compromissos.Contato!.Id,
+            SelecionarContatos()
+        ));
     }
 
     public List<ListarCompromissosDto> SelecionarTodos()

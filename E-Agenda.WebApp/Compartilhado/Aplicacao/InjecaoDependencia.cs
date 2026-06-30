@@ -1,3 +1,4 @@
+using E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
 using EAgendaWeb.WebApp.Compartilhado.Aplicacao.Logging;
 using EAgendaWeb.WebApp.Modulos.ModuloTarefas.Aplicacao;
 
@@ -13,5 +14,6 @@ public static class InjecaoDependencia
     {
         services.AddSerilogLogger(configuration, logging);
         services.AddScoped<ServicoTarefa>();
+        services.AddScoped<ServicoContato>();
     }
 }

@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kauan\\Documents\\Academia-Do-Programador-FullStack\\Atividades\\E-Agenda2026\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj": {}
+    "C:\\Users\\kauan\\Documents\\CursoADP\\Modulo4\\E-Agenda-Web\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kauan\\Documents\\Academia-Do-Programador-FullStack\\Atividades\\E-Agenda2026\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj": {
+    "C:\\Users\\kauan\\Documents\\CursoADP\\Modulo4\\E-Agenda-Web\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kauan\\Documents\\Academia-Do-Programador-FullStack\\Atividades\\E-Agenda2026\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\kauan\\Documents\\CursoADP\\Modulo4\\E-Agenda-Web\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj",
         "projectName": "E-Agenda.WebApp",
-        "projectPath": "C:\\Users\\kauan\\Documents\\Academia-Do-Programador-FullStack\\Atividades\\E-Agenda2026\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj",
+        "projectPath": "C:\\Users\\kauan\\Documents\\CursoADP\\Modulo4\\E-Agenda-Web\\E-Agenda.WebApp\\E-Agenda.WebApp.csproj",
         "packagesPath": "C:\\Users\\kauan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kauan\\Documents\\Academia-Do-Programador-FullStack\\Atividades\\E-Agenda2026\\E-Agenda.WebApp\\obj\\",
+        "outputPath": "C:\\Users\\kauan\\Documents\\CursoADP\\Modulo4\\E-Agenda-Web\\E-Agenda.WebApp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\kauan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kauan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

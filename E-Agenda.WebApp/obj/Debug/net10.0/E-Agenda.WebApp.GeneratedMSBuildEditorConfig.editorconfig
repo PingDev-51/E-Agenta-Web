@@ -46,20 +46,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb3NcQXByZXNlbnRhY2FvXFZpZXdzXExpc3Rhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContatos/Apresentacao/Views/Cadastrar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvc1xBcHJlc2VudGFjYW9cVmlld3NcQ2FkYXN0cmFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContato/Apresentacao/Views/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvXEFwcmVzZW50YWNhb1xWaWV3c1xDYWRhc3RyYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContatos/Apresentacao/Views/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvc1xBcHJlc2VudGFjYW9cVmlld3NcRWRpdGFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContato/Apresentacao/Views/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvXEFwcmVzZW50YWNhb1xWaWV3c1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContatos/Apresentacao/Views/Excluir.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvc1xBcHJlc2VudGFjYW9cVmlld3NcRXhjbHVpci5jc2h0bWw=
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContato/Apresentacao/Views/Excluir.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvXEFwcmVzZW50YWNhb1xWaWV3c1xFeGNsdWlyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContatos/Apresentacao/Views/Listar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvc1xBcHJlc2VudGFjYW9cVmlld3NcTGlzdGFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloContato/Apresentacao/Views/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvXEFwcmVzZW50YWNhb1xWaWV3c1xMaXN0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloDespesas/Apresentacao/Views/Cadastrar.cshtml]
@@ -78,32 +78,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhc1xBcHJlc2VudGFjYW9cVmlld3NcTGlzdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloItemTarefa/Aplicacao/Views/Cadastrar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9JdGVtVGFyZWZhXEFwbGljYWNhb1xWaWV3c1xDYWRhc3RyYXIuY3NodG1s
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/GerenciarItens.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXEdlcmVuY2lhckl0ZW5zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloItemTarefa/Aplicacao/Views/Excluir.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9JdGVtVGFyZWZhXEFwbGljYWNhb1xWaWV3c1xFeGNsdWlyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloItemTarefa/Aplicacao/Views/Listar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9JdGVtVGFyZWZhXEFwbGljYWNhb1xWaWV3c1xMaXN0YXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefas/Apresentacao/Views/Cadastrar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFzXEFwcmVzZW50YWNhb1xWaWV3c1xDYWRhc3RyYXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefas/Apresentacao/Views/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFzXEFwcmVzZW50YWNhb1xWaWV3c1xFZGl0YXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefas/Apresentacao/Views/Excluir.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFzXEFwcmVzZW50YWNhb1xWaWV3c1xFeGNsdWlyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefas/Apresentacao/Views/Listar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFzXEFwcmVzZW50YWNhb1xWaWV3c1xMaXN0YXIuY3NodG1s
+[C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/_TarefaCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXF9UYXJlZmFDYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kauan/Documents/CursoADP/Modulo4/E-Agenda-Web/E-Agenda.WebApp/_ViewImports.cshtml]

@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 
-namespace EAgendaWeb.WebApp.Compartilhado.Infra.Sql;
+namespace eAgenda.WebApp.Compartilhado.Infra.Sql;
 
 public interface ISqlConnectionFactory
 {
@@ -9,7 +9,7 @@ public interface ISqlConnectionFactory
 
 public sealed class SqlConnectionFactory(IConfiguration configuration) : ISqlConnectionFactory
 {
-    private const string NomeConnectionString = "E_Agenda";
+    private const string NomeConnectionString = "SqlServer";
 
     // ConnectionString = Endereço do banco de dados local/remoto que vamos usar
     public SqlConnection CreateConnection()

@@ -1,4 +1,4 @@
-namespace EAgendaWeb.WebApp.Compartilhado.Dominio;
+namespace eAgenda.WebApp.Compartilhado.Dominio;
 
 public abstract class EntidadeBase<T>
 {

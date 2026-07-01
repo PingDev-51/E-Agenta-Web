@@ -1,133 +1,122 @@
-// using System;
-// using System.ComponentModel;
-// using E_Agenda.WebApp.Modulos.ModuloCategoria.Dominio;
-// using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
-// using FluentResults;
+using FluentResults;
+using eAgenda.WebApp.Compartilhado.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloCategoria.Dominio;
 
-// namespace E_Agenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
+namespace eAgenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
 
-// public class ServicoCategoria
-// {
-//     private readonly IRepositorioCategoria repositorioCategoria;
-//     private readonly IRepositorioDespesas repositorioDespesas;
+public class ServicoCategoria : ServicoBase<Categoria>
+{
+    private readonly IRepositorioCategoria repositorioCategoria;
 
-//     public ServicoCategoria(IRepositorioCategoria repositorioCategoria, IRepositorioDespesas repositorioDespesas)
-//     {
-//         this.repositorioCategoria = repositorioCategoria;
-//         this.repositorioDespesas = repositorioDespesas;
-//     }
+    public ServicoCategoria(
+        IRepositorioCategoria repositorioCategoria
+    )
+    {
+        this.repositorioCategoria = repositorioCategoria;
+    }
 
-//     public Result Cadastrar(CadastrarCategoriaDto dto)
-//     {
-//         Despesas? despesasSelecionada = repositorioDespesas.SelecionarPorId(dto.DespesasId);
+    public Result Cadastrar(CadastrarCategoriaDto dto)
+    {
+        if (ExisteCategoriaComMesmoTitulo(dto.Titulo))
+            return Falha(nameof(dto.Titulo), "Já existe uma categoria com este título.");
 
-//         if (despesasSelecionada == null)
-//             return Falha("Não foi possivel encontrar uma despesa", "Despesas");
+        Categoria novaCategoria = new Categoria(dto.Titulo);
 
-//         if (ExisteDuplicado(dto.Titulo))
-//             return Falha("Titulo", "Já existe este titulo");
+        Result resultadoValidacao = ValidarEntidade(novaCategoria);
 
-//         Categoria novaCategoria = new Categoria(
-//             dto.Titulo,
-//             despesasSelecionada!
-//         );
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
 
-//         repositorioCategoria.Cadastrar(novaCategoria);
+        repositorioCategoria.Cadastrar(novaCategoria);
 
-//         return Result.Ok();
-//     }
+        return Result.Ok();
+    }
 
-//     public Result Editar(EditarCategoriaDto dto)
-//     {
-//         Despesas? despesasSelecionada = repositorioDespesas.SelecionarPorId(dto.DespesasId);
+    public Result Editar(EditarCategoriaDto dto)
+    {
+        if (ExisteCategoriaComMesmoTitulo(dto.Titulo, dto.Id))
+            return Falha(nameof(dto.Titulo), "Já existe uma categoria com este título.");
 
-//         if (despesasSelecionada == null)
-//             return Falha("Despesa", "Não foi possivel encontrar uma Despesa");
+        Categoria categoriaAtualizada = new Categoria(dto.Titulo);
 
-//         if (ExisteDuplicado(dto.Titulo, dto.Id))
-//             return Falha("Titulo", "Já existe este titulo");
+        Result resultadoValidacao = ValidarEntidade(categoriaAtualizada);
 
-//         Categoria CategoriaAtualizada = new Categoria(
-//             dto.Titulo,
-//             despesasSelecionada!
-//         );
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
 
-//         bool conseguiuEditar = repositorioCategoria.Editar(dto.Id, CategoriaAtualizada);
+        bool conseguiuEditar = repositorioCategoria.Editar(dto.Id, categoriaAtualizada);
 
-//         if (!conseguiuEditar)
-//             return Falha("Despesa", "Não foi possivel encontrar uma Despesa");
+        if (!conseguiuEditar)
+            return Falha(string.Empty, "Categoria não encontrada.");
 
-//         return Result.Ok();
-//     }
+        return Result.Ok();
+    }
 
-//     public Result Excluir(Guid id)
-//     {
-//         Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
+    public Result Excluir(Guid id)
+    {
+        Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
 
-//         if (categoria == null)
-//             return Falha("Despesa", "Não foi possivel encontrar uma Despesa");
+        if (categoria == null)
+            return Falha(string.Empty, "Categoria não encontrada.");
 
-//         List<Despesas> despesas = repositorioDespesas.SelecionarTodos();
+        repositorioCategoria.Excluir(id);
 
-//         foreach (Despesas d in despesas)
-//         {
-//             if (string.Equals(d.Categorias!.Id, id))
-//                 return Result.Fail("Esta Categoria não pode ser excluída pois está relacionada a uma Despesa.");
-//         }
+        return Result.Ok();
+    }
 
-//         repositorioCategoria.Excluir(id);
+    public List<ListarCategoriasDto> SelecionarTodos()
+    {
+        return repositorioCategoria
+            .SelecionarTodos()
+            .Select(c => new ListarCategoriasDto(c.Id, c.Titulo))
+            .ToList();
+    }
 
-//         return Result.Ok();
-//     }
+    public Result<DetalhesCategoriaDto> SelecionarPorId(Guid id)
+    {
+        Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
 
-//     public Result<DetalhesCategoriaDto> SelecionarPorId(Guid id)
-//     {
-//         Categoria? categoria = repositorioCategoria.SelecionarPorId(id);
+        if (categoria == null)
+            return Result.Fail("Categoria não encontrada.");
 
-//         if (categoria == null)
-//             return Result.Fail("Compromissos não encontrado");
+        return Result.Ok(new DetalhesCategoriaDto(categoria.Id, categoria.Titulo));
+    }
 
-//         return Result.Ok(new DetalhesCategoriaDto(
-//             categoria.Titulo,
-//             categoria.Depesas!.Id,
-//             SelecionarDespesas()
-//         ));
-//     }
-//     public List<ListarCategoriaDto> SelecionarTodos()
-//     {
-//         List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+    private bool ExisteCategoriaComMesmoTitulo(string titulo, Guid? idIgnorado = null)
+    {
+        string tituloNormalizado = NormalizarTitulo(titulo);
 
-//         return categorias.Select(c => new ListarCategoriaDto(
-//             c.Id,
-//             c.Titulo,
-//             c.Depesas!.Descricao
-//         )).ToList();
-//     }
+        return repositorioCategoria
+            .SelecionarTodos()
+            .Any(c =>
+                c.Id != idIgnorado &&
+                NormalizarTitulo(c.Titulo) == tituloNormalizado
+            );
+    }
 
-//     public List<OpcaoDespesasDto> SelecionarDespesas()
-//     {
-//         List<Despesas> despesas = repositorioDespesas.SelecionarTodos();
+    private static string NormalizarTitulo(string titulo)
+    {
+        return titulo.Trim().ToLowerInvariant();
+    }
 
-//         return despesas.Select(d => new OpcaoDespesasDto(d.Id, d.Descricao)).ToList();
-//     }
 
-//     private static Result Falha(string campo, string mensagem)
-//     {
-//         IError erro = new Error(mensagem).WithMetadata("Campo", campo);
+    private static Result Falha(string campo, string mensagem)
+    {
+        IError erro = new Error(mensagem).WithMetadata("Campo", campo);
 
-//         return Result.Fail(erro);
-//     }
+        return Result.Fail(erro);
+    }
 
-//     private bool ExisteDuplicado(string etiqueta, Guid? idIgnorado = null)
-//     {
-//         List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
+    private bool ExisteDuplicado(string etiqueta, Guid? idIgnorado = null)
+    {
+        List<Categoria> categorias = repositorioCategoria.SelecionarTodos();
 
-//         foreach (Categoria c in categorias)
-//         {
-//             if (c.Id != idIgnorado && string.Equals(c.Titulo, etiqueta, StringComparison.OrdinalIgnoreCase))
-//                 return true;
-//         }
+        foreach (Categoria c in categorias)
+        {
+            if (c.Id != idIgnorado && string.Equals(c.Titulo, etiqueta, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
 
-//         return false;
-//     }
-// }
+        return false;
+    }
+}

@@ -1,54 +1,27 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCategoria.Apresentacao;
+namespace eAgenda.WebApp.Modulos.ModuloCategoria.Apresentacao;
 
-public record ListarCategoriaViewModel(
+public record ListarCategoriasViewModel(
     Guid Id,
-    string Titulo,
-    string Despesas
+    string Titulo
 );
 
 public record CadastrarCategoriaViewModel(
-    [Required(ErrorMessage = "O campo Titulo é obrigatorio")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O Campo Tirulo deve conter entre 2 a 100 caracteres")]
-    string Titulo,
-
-
-    Guid DespesasId,
-    [ValidateNever]
-    List<OpcaoDespesasViewModel> Despesas
+    [Required(ErrorMessage = "O campo \"Título\" deve ser preenchido.")]
+    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo \"Título\" deve conter entre 2 e 100 caracteres.")]
+    string Titulo
 );
 
 public record EditarCategoriaViewModel(
     Guid Id,
 
-    [Required(ErrorMessage = "O campo Titulo é obrigatorio")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O Campo Tirulo deve conter entre 2 a 100 caracteres")]
-    string Titulo,
-
-
-    Guid DespesasId,
-    [ValidateNever]
-    List<OpcaoDespesasViewModel> Despesas
+    [Required(ErrorMessage = "O campo \"Título\" deve ser preenchido.")]
+    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo \"Título\" deve conter entre 2 e 100 caracteres.")]
+    string Titulo
 );
 
 public record ExcluirCategoriaViewModel(
     Guid Id,
-
-    [Required(ErrorMessage = "O campo Titulo é obrigatorio")]
-    [StringLength(100, MinimumLength = 2, ErrorMessage = "O Campo Tirulo deve conter entre 2 a 100 caracteres")]
-    string Titulo,
-
-
-    Guid DespesasId,
-    [ValidateNever]
-    List<OpcaoDespesasViewModel> Despesas
-);
-
-
-public record OpcaoDespesasViewModel(
-    Guid Id,
-    string Descricao
+    string Titulo
 );

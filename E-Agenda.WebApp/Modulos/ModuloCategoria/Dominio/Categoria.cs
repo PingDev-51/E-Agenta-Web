@@ -1,33 +1,32 @@
-using System;
-using EAgendaWeb.WebApp.Compartilhado.Dominio;
-using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
+using eAgenda.WebApp.Compartilhado.Dominio;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCategoria.Dominio;
+namespace eAgenda.WebApp.Modulos.ModuloCategoria.Dominio;
 
 public class Categoria : EntidadeBase<Categoria>
 {
     public string Titulo { get; set; } = string.Empty;
-    public Despesas? Depesas { get; set; } = null;
 
-    public Categoria(string titulo, Despesas? depesas)
+    public Categoria()
+    {
+    }
+
+    public Categoria(string titulo) : this()
     {
         Titulo = titulo;
-        Depesas = depesas;
+    }
+
+    public override List<string> Validar()
+    {
+        List<string> erros = [];
+
+        if (string.IsNullOrWhiteSpace(Titulo) || Titulo.Length < 2 || Titulo.Length > 100)
+            erros.Add("O campo \"Título\" deve conter entre 2 e 100 caracteres.");
+
+        return erros;
     }
 
     public override void Atualizar(Categoria entidadeAtualizada)
     {
         Titulo = entidadeAtualizada.Titulo;
-        Depesas = entidadeAtualizada.Depesas;
-    }
-
-    public override List<string> Validar()
-    {
-        List<string> erro = new();
-
-        if (Titulo.Length < 2 || Titulo.Length > 100)
-            erro.Add("O campo Titulo deve conter entre 2 a 100 caracteres");
-
-        return erro;
     }
 }

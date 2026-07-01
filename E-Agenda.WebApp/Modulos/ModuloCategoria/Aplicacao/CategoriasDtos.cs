@@ -1,39 +1,18 @@
-using System;
+namespace eAgenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
-
-public record ListarCategoriaDto(
+public record ListarCategoriasDto(
     Guid Id,
-    string Titulo,
-    string Despesas
+    string Titulo
 );
 
-public record CadastrarCategoriaDto(
-    string Titulo,
-    Guid DespesasId,
-    OpcaoDespesasDto Despesas
-);
+public record CadastrarCategoriaDto(string Titulo);
 
 public record EditarCategoriaDto(
     Guid Id,
-    string Titulo,
-    Guid DespesasId,
-    OpcaoDespesasDto Despesas
+    string Titulo
 );
 
-public record ExcluirCategoriaDto(
-    Guid Id,
-    string Titulo,
-    Guid DespesasId,
-    OpcaoDespesasDto Despesas
-);
 public record DetalhesCategoriaDto(
-    string Titulo,
-    Guid DespesasId,
-    List<OpcaoDespesasDto> Despesas
-);
-
-public record OpcaoDespesasDto(
     Guid Id,
-    string Descricao
+    string Titulo
 );

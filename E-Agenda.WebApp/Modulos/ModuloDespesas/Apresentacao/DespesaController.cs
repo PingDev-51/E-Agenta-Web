@@ -1,141 +1,129 @@
+using AutoMapper;
+using FluentResults;
+using eAgenda.WebApp.Compartilhado.Apresentacao.Extensions;
+using eAgenda.WebApp.Modulos.ModuloDespesa.Aplicacao;
+using Microsoft.AspNetCore.Mvc;
+using eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
 
-// using AutoMapper;
-// using EAgendaWeb.WebApp.Compartilhado.Apresentacao.Extensions;
-// using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Aplicacao;
-// using FluentResults;
-// using Microsoft.AspNetCore.Mvc;
+namespace eAgenda.WebApp.Modulos.ModuloDespesa.Apresentacao;
 
-// namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Apresentacao;
+public class DespesaController(ServicoDespesa servicoDespesa, IMapper mapeador) : Controller
+{
+    [HttpGet]
+    public ActionResult Listar()
+    {
+        List<ListarDespesasDto> dtos = servicoDespesa.SelecionarTodos();
 
-// public class DespesaController : Controller
-// {
-//     private readonly ServicoDespesa servicoDespesa;
-//     private readonly IMapper mapper;
+        List<ListarDespesasViewModel> listarVms = mapeador.Map<List<ListarDespesasViewModel>>(dtos);
 
-//     public DespesaController(ServicoDespesa servicoDespesa, IMapper mapper)
-//     {
-//         this.servicoDespesa = servicoDespesa;
-//         this.mapper = mapper;
-//     }
+        return View(listarVms);
+    }
 
-//     public ActionResult Listar()
-//     {
-//         List<DetalhesDespesaDto> detalhesDespesaDtos = servicoDespesa.SelecionarTodos();
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        CadastrarDespesaViewModel cadastrarVm = new CadastrarDespesaViewModel(
+            string.Empty,
+            DateTime.Today,
+            0,
+            FormaPagamento.AVista,
+            [],
+            SelecionarCategorias()
+        );
 
-//         List<ListarDespesaViewModel> listarDespesaViewModels =
-//             mapper.Map<List<ListarDespesaViewModel>>(detalhesDespesaDtos);
+        return View(cadastrarVm);
+    }
 
-//         return View(listarDespesaViewModels);
-//     }
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarDespesaViewModel cadastrarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(cadastrarVm with { Categorias = SelecionarCategorias() });
 
-//     [HttpGet]
-//     public ActionResult Cadastrar()
-//     {
-//         //Carregar categorias disponíveis
-//         // vm.CategoriasDisponiveis = ...
+        CadastrarDespesaDto dto = mapeador.Map<CadastrarDespesaDto>(cadastrarVm);
 
-//         return View();
-//     }
+        Result resultado = servicoDespesa.Cadastrar(dto);
 
-//     [HttpPost]
-//     public ActionResult Cadastrar(CadastroDespesaViewModel vm)
-//     {
-//         if (!ModelState.IsValid)
-//         {
-//             // TODO: Recarregar categorias antes de retornar a View
-//             // vm.CategoriasDisponiveis = ...
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
 
-//             return View(vm);
-//         }
+            return View(cadastrarVm with { Categorias = SelecionarCategorias() });
+        }
 
-//         CadastroDespesaDto dto = mapper.Map<CadastroDespesaDto>(vm);
+        return RedirectToAction(nameof(Listar));
+    }
 
-//         Result resultado = servicoDespesa.Cadastrar(dto);
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesDespesaDto> resultado = servicoDespesa.SelecionarPorId(id);
 
-//         if (resultado.IsFailed)
-//         {
-//             ModelState.AddModelError(resultado);
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
 
-//             // Recarregar categorias
-//             // vm.CategoriasDisponiveis = ...
+            return RedirectToAction(nameof(Listar));
+        }
 
-//             return View(vm);
-//         }
+        EditarDespesaViewModel editarVm =
+            mapeador.Map<EditarDespesaViewModel>(resultado.Value) with { Categorias = SelecionarCategorias() };
 
-//         return RedirectToAction(nameof(Listar));
-//     }
+        return View(editarVm);
+    }
 
-//     [HttpGet]
-//     public ActionResult Editar(Guid id)
-//     {
-//         Result<DetalhesDespesaDto> resultado = servicoDespesa.SelecionarPorId(id);
+    [HttpPost]
+    public ActionResult Editar(EditarDespesaViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm with { Categorias = SelecionarCategorias() });
 
-//         if (resultado.IsFailed)
-//             return RedirectToAction(nameof(Listar));
+        EditarDespesaDto dto = mapeador.Map<EditarDespesaDto>(editarVm);
 
-//         EditarDespesaViewModel vm =
-//             mapper.Map<EditarDespesaViewModel>(resultado.Value);
+        Result resultado = servicoDespesa.Editar(dto);
 
-//         //  Carregar categorias disponíveis
-//         //  Marcar as categorias já vinculadas à despesa
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
 
-//         return View(vm);
-//     }
+            return View(editarVm with { Categorias = SelecionarCategorias() });
+        }
 
-//     [HttpPost]
-//     public ActionResult Editar(EditarDespesaViewModel vm)
-//     {
-//         if (!ModelState.IsValid)
-//         {
-//             //Recarregar categorias
-//             // vm.CategoriasDisponiveis = ...
+        return RedirectToAction(nameof(Listar));
+    }
 
-//             return View(vm);
-//         }
+    [HttpGet]
+    public ActionResult Excluir(Guid id)
+    {
+        Result<DetalhesDespesaDto> resultado = servicoDespesa.SelecionarPorId(id);
 
-//         EditarDespesaDto dto = mapper.Map<EditarDespesaDto>(vm);
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
 
-//         Result resultado = servicoDespesa.Editar(dto);
+            return RedirectToAction(nameof(Listar));
+        }
 
-//         if (resultado.IsFailed)
-//         {
-//             ModelState.AddModelError(resultado);
+        ExcluirDespesaViewModel excluirVm = mapeador.Map<ExcluirDespesaViewModel>(resultado.Value);
 
-//             //Recarregar categorias
-//             // vm.CategoriasDisponiveis = ...
+        return View(excluirVm);
+    }
 
-//             return View(vm);
-//         }
+    [HttpPost]
+    public ActionResult Excluir(ExcluirDespesaViewModel excluirVm)
+    {
+        Result resultado = servicoDespesa.Excluir(excluirVm.Id);
 
-//         return RedirectToAction(nameof(Listar));
-//     }
+        if (resultado.IsFailed)
+            TempData.AddErrorMessage(resultado);
 
-//     [HttpGet]
-//     public ActionResult Excluir(Guid id)
-//     {
-//         Result<DetalhesDespesaDto> resultado = servicoDespesa.SelecionarPorId(id);
+        return RedirectToAction(nameof(Listar));
+    }
 
-//         if (resultado.IsFailed)
-//             return RedirectToAction(nameof(Listar));
+    private List<CategoriaDespesaViewModel> SelecionarCategorias()
+    {
+        List<CategoriaDespesaDto> dtos = servicoDespesa.SelecionarCategorias();
 
-//         ExcluirDespesaViewModel vm =
-//             mapper.Map<ExcluirDespesaViewModel>(resultado.Value);
-
-//         return View(vm);
-//     }
-
-//     [HttpPost]
-//     public ActionResult Excluir(ExcluirDespesaViewModel vm)
-//     {
-//         Result resultado = servicoDespesa.Excluir(vm.Id);
-
-//         if (resultado.IsFailed)
-//         {
-//             ModelState.AddModelError(resultado);
-
-//             return View(vm);
-//         }
-
-//         return RedirectToAction(nameof(Listar));
-//     }
-// }
+        return mapeador.Map<List<CategoriaDespesaViewModel>>(dtos);
+    }
+}

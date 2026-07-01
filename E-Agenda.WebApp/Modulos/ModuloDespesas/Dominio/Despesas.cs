@@ -1,58 +1,63 @@
-using E_Agenda.WebApp.Modulos.ModuloCategoria.Dominio;
-using EAgendaWeb.WebApp.Compartilhado.Dominio;
+using eAgenda.WebApp.Compartilhado.Dominio;
+using eAgenda.WebApp.Modulos.ModuloCategoria.Dominio;
 
-namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
+namespace eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
 
-public class Despesas : EntidadeBase<Despesas>
+public class Despesa : EntidadeBase<Despesa>
 {
-    public string Descricao { get; set; }
-
-    public DateTime DataOcorrencia { get; set; }
-
+    public string Descricao { get; set; } = string.Empty;
+    public DateTime DataOcorrencia { get; set; } = DateTime.Today;
     public decimal Valor { get; set; }
-
     public FormaPagamento FormaPagamento { get; set; }
+    public List<Categoria> Categorias { get; set; } = [];
 
-    // public List<Categoria>? Categorias { get; set; } = null;
-
-    public Despesas() { }
-
-    public Despesas(
-        string descricao,
-        decimal valor,
-        FormaPagamento formaPagamento,
-        List<Categoria>? categorias
-        )
+    public Despesa()
     {
-        Descricao = descricao;
-        Valor = valor;
-        FormaPagamento = formaPagamento;
-        // Categorias = categorias;
-        DataOcorrencia = DateTime.Now;
     }
 
-    public override void Atualizar(Despesas despesaAtualizada)
+    public Despesa(
+        string descricao,
+        DateTime dataOcorrencia,
+        decimal valor,
+        FormaPagamento formaPagamento,
+        List<Categoria> categorias
+    ) : this()
     {
-        Descricao = despesaAtualizada.Descricao;
-        DataOcorrencia = despesaAtualizada.DataOcorrencia;
-        Valor = despesaAtualizada.Valor;
-        FormaPagamento = despesaAtualizada.FormaPagamento;
-        // Categorias = despesaAtualizada.Categorias;
+        Descricao = descricao;
+        DataOcorrencia = dataOcorrencia.Date;
+        Valor = valor;
+        FormaPagamento = formaPagamento;
+        Categorias = categorias;
     }
 
     public override List<string> Validar()
     {
-        List<string> erros = new();
+        List<string> erros = [];
 
-        if (Descricao.Length < 2 || Descricao.Length > 100)
+        if (string.IsNullOrWhiteSpace(Descricao) || Descricao.Length < 2 || Descricao.Length > 100)
             erros.Add("O campo \"Descrição\" deve conter entre 2 e 100 caracteres.");
 
-        if (Valor <= 0)
-            erros.Add("O valor deve ser maior que zero.");
+        if (DataOcorrencia == default)
+            erros.Add("O campo \"Data de Ocorrência\" deve ser preenchido.");
 
-        // if (Categorias == null || Categorias.Count == 0)
-        //     erros.Add("Selecione pelo menos uma categoria.");
+        if (Valor <= 0)
+            erros.Add("O campo \"Valor\" deve ser maior que zero.");
+
+        if (!Enum.IsDefined(FormaPagamento))
+            erros.Add("O campo \"Forma de Pagamento\" deve ser preenchido.");
+
+        if (Categorias.Count == 0)
+            erros.Add("Selecione ao menos uma categoria.");
 
         return erros;
+    }
+
+    public override void Atualizar(Despesa entidadeAtualizada)
+    {
+        Descricao = entidadeAtualizada.Descricao;
+        DataOcorrencia = entidadeAtualizada.DataOcorrencia;
+        Valor = entidadeAtualizada.Valor;
+        FormaPagamento = entidadeAtualizada.FormaPagamento;
+        Categorias = entidadeAtualizada.Categorias;
     }
 }

@@ -1,19 +1,20 @@
-using System;
 using AutoMapper;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCompromissos.Apresentacao;
+namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Apresentacao;
 
 public class CompromissoProfile : Profile
 {
     public CompromissoProfile()
     {
-        CreateMap<ListarCompromissosDto, ListarCompromissosViewModels>();
-        CreateMap<CadastrarCompromissosViewModels, CadastrarCompromissosDto>();
-        CreateMap<EditarCompromissosViewModels, EditarCompromissosDto>();
-        CreateMap<ExcluirCompromissosViewModels, ExcluirCompromissosDto>();
+        CreateMap<OpcaoContatoDto, OpcaoContatoViewModel>();
+        CreateMap<ListarCompromissosDto, ListarCompromissosViewModel>();
+        CreateMap<CadastrarCompromissoViewModel, CadastrarCompromissoDto>();
+        CreateMap<EditarCompromissoViewModel, EditarCompromissoDto>();
 
-        CreateMap<DetalhesCompromissosDto, EditarCompromissosViewModels>();
-        CreateMap<DetalhesCompromissosDto, ExcluirCompromissosViewModels>();
+        CreateMap<DetalhesCompromissoDto, EditarCompromissoViewModel>()
+            .ForCtorParam("Contatos", opt => opt.MapFrom(_ => new List<OpcaoContatoViewModel>()));
+
+        CreateMap<DetalhesCompromissoDto, ExcluirCompromissoViewModel>();
     }
 }

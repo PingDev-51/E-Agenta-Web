@@ -1,11 +1,11 @@
 using Dapper;
-using EAgendaWeb.WebApp.Compartilhado.Infra.Sql;
-using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
+using eAgenda.WebApp.Compartilhado.Infra.Sql;
+using eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
 using Microsoft.Data.SqlClient;
 
 namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Infra;
 
-public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioDespesas
+public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioDespesa
 {
     private const string InserirSql = """
         INSERT INTO dbo.TBDespesas
@@ -63,7 +63,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
         ORDER BY DataOcorrencia DESC;
     """;
 
-    public void Cadastrar(Despesas entidade)
+    public void Cadastrar(Despesa entidade)
     {
         using SqlConnection conexao = connectionFactory.CreateConnection();
 
@@ -72,7 +72,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
         conexao.Execute(InserirSql, entidade);
     }
 
-    public bool Editar(Guid idSelecionado, Despesas entidadeAtualizada)
+    public bool Editar(Guid idSelecionado, Despesa entidadeAtualizada)
     {
         entidadeAtualizada.Id = idSelecionado;
 
@@ -92,27 +92,27 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
         return conexao.Execute(ExcluirSql, new { Id = idSelecionado }) == 1;
     }
 
-    public Despesas? SelecionarPorId(Guid idSelecionado)
+    public Despesa? SelecionarPorId(Guid idSelecionado)
     {
         using SqlConnection conexao = connectionFactory.CreateConnection();
 
         conexao.Open();
 
-        return conexao.QuerySingleOrDefault<Despesas>(
+        return conexao.QuerySingleOrDefault<Despesa>(
             SelecionarPorIdSql,
             new { Id = idSelecionado });
     }
 
-    public List<Despesas> SelecionarTodos()
+    public List<Despesa> SelecionarTodos()
     {
         using SqlConnection conexao = connectionFactory.CreateConnection();
 
         conexao.Open();
 
-        return conexao.Query<Despesas>(SelecionarTodosSql).ToList();
+        return conexao.Query<Despesa>(SelecionarTodosSql).ToList();
     }
 
-    public List<Despesas> Filtrar(Predicate<Despesas> filtro)
+    public List<Despesa> Filtrar(Predicate<Despesa> filtro)
     {
         return SelecionarTodos().FindAll(filtro);
     }

@@ -1,8 +1,8 @@
-namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
+namespace eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
 
 public enum FormaPagamento
 {
-    AVista = 0,
-    Credito = 1,
-    Debito = 2
+    AVista,
+    Credito,
+    Debito
 }

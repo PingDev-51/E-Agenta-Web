@@ -1,4 +1,4 @@
-namespace EAgendaWeb.WebApp.Compartilhado.Dominio;
+namespace eAgenda.WebApp.Compartilhado.Dominio;
 
 public interface IRepositorio<T> where T : EntidadeBase<T>
 {

@@ -1,68 +1,55 @@
-using System;
 using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCompromissos.Aplicacao;
+namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
 
 public record ListarCompromissosDto(
     Guid Id,
     string Assunto,
     DateTime DataOcorrencia,
-    DateTime HoraDeIncio,
-    DateTime HoraDeTermino,
-    TipoCompromisso TipoDeCompromisso,
-    string Local,
-    string Link,
-    string Contato
+    TimeSpan HoraInicio,
+    TimeSpan HoraTermino,
+    TipoCompromisso Tipo,
+    string? Local,
+    string? Link,
+    Guid? ContatoId,
+    string? ContatoNome
 );
 
-public record CadastrarCompromissosDto(
-    string Assunto,
-    DateTime HoraDeInicio,
-    DateTime HoraDeTermino,
-    TipoCompromisso TipoDeCompromisso,
-    string Local,
-    string Link,
-    Guid contatoId,
-    List<OpcaoContatoDto> Contato
-);
-
-public record EditarCompromissosDto(
-    Guid Id,
-    string Assunto,
-    DateTime HoraDeInicio,
-    DateTime HoraDeTermino,
-    TipoCompromisso TipoDeCompromisso,
-    string Local,
-    string Link,
-    Guid contatoId,
-    List<OpcaoContatoDto> Contato
-);
-
-public record ExcluirCompromissosDto(
-    Guid Id,
-    string Assunto,
-    DateTime HoraDeInicio,
-    DateTime HoraDeTermino,
-    TipoCompromisso TipoDeCompromisso,
-    string Local,
-    string Link,
-    Guid contatoId,
-    List<OpcaoContatoDto> Contato
-);
-
-public record DetalhesCompromissosDto(
+public record CadastrarCompromissoDto(
     string Assunto,
     DateTime DataOcorrencia,
-    DateTime HoraDeIncio,
-    DateTime HoraDeTermino,
-    TipoCompromisso TipoDeCompromisso,
-    string Local,
-    string Link,
-    Guid contatoId,
-    List<OpcaoContatoDto> Contato
+    TimeSpan HoraInicio,
+    TimeSpan HoraTermino,
+    TipoCompromisso Tipo,
+    string? Local,
+    string? Link,
+    Guid? ContatoId
 );
 
-public record OpcaoContatoDto(
+public record EditarCompromissoDto(
     Guid Id,
-    string Nome
+    string Assunto,
+    DateTime DataOcorrencia,
+    TimeSpan HoraInicio,
+    TimeSpan HoraTermino,
+    TipoCompromisso Tipo,
+    string? Local,
+    string? Link,
+    Guid? ContatoId
 );
+
+public record DetalhesCompromissoDto(
+    Guid Id,
+    string Assunto,
+    DateTime DataOcorrencia,
+    TimeSpan HoraInicio,
+    TimeSpan HoraTermino,
+    TipoCompromisso Tipo,
+    string? Local,
+    string? Link,
+    Guid? ContatoId,
+    string? ContatoNome
+);
+
+public record OpcaoContatoDto(Guid Id, string Nome);

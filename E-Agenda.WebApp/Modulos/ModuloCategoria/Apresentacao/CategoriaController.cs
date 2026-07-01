@@ -1,139 +1,113 @@
-// using System;
-// using AutoMapper;
-// using E_Agenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
-// using EAgendaWeb.WebApp.Compartilhado.Apresentacao.Extensions;
-// using FluentResults;
-// using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using FluentResults;
+using eAgenda.WebApp.Compartilhado.Apresentacao.Extensions;
+using eAgenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
+using Microsoft.AspNetCore.Mvc;
 
-// namespace E_Agenda.WebApp.Modulos.ModuloCategoria.Apresentacao;
+namespace eAgenda.WebApp.Modulos.ModuloCategoria.Apresentacao;
 
-// public class CategoriaController : Controller
-// {
-//     private readonly ServicoCategoria servicoCategoria;
-//     private readonly IMapper mapeador;
+public class CategoriaController(ServicoCategoria servicoCategoria, IMapper mapeador) : Controller
+{
+    [HttpGet]
+    public ActionResult Listar()
+    {
+        List<ListarCategoriasDto> dtos = servicoCategoria.SelecionarTodos();
 
-//     public CategoriaController(ServicoCategoria servicoCategoria, IMapper mapeador)
-//     {
-//         this.servicoCategoria = servicoCategoria;
-//         this.mapeador = mapeador;
-//     }
+        List<ListarCategoriasViewModel> listarVms = mapeador.Map<List<ListarCategoriasViewModel>>(dtos);
 
-//     public ActionResult Listar()
-//     {
-//         List<ListarCategoriaDto> dto = servicoCategoria.SelecionarTodos();
+        return View(listarVms);
+    }
 
-//         List<ListarCategoriaViewModel> listarVm = mapeador.Map<List<ListarCategoriaViewModel>>(dto);
+    [HttpGet]
+    public ActionResult Cadastrar()
+    {
+        CadastrarCategoriaViewModel cadastrarVm = new CadastrarCategoriaViewModel(string.Empty);
 
-//         return View(listarVm);
-//     }
+        return View(cadastrarVm);
+    }
 
-//     [HttpGet]
-//     public ActionResult Cadastrar()
-//     {
-//         CadastrarCategoriaViewModel cadastrarVm = new CadastrarCategoriaViewModel(
-//             string.Empty,
-//             Guid.Empty,
-//             SelecionarDespesas()
-//         );
+    [HttpPost]
+    public ActionResult Cadastrar(CadastrarCategoriaViewModel cadastrarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(cadastrarVm);
 
-//         return View(cadastrarVm);
-//     }
+        CadastrarCategoriaDto dto = mapeador.Map<CadastrarCategoriaDto>(cadastrarVm);
 
-//     [HttpPost]
-//     public ActionResult Cadastrar(CadastrarCategoriaViewModel cadastrarVm)
-//     {
-//         if (!ModelState.IsValid)
-//             return View(cadastrarVm with { Despesas = SelecionarDespesas() });
+        Result resultado = servicoCategoria.Cadastrar(dto);
 
-//         CadastrarCategoriaDto dto = mapeador.Map<CadastrarCategoriaDto>(cadastrarVm);
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
 
-//         Result resultado = servicoCategoria.Cadastrar(dto);
+            return View(cadastrarVm);
+        }
 
-//         if (resultado.IsFailed)
-//         {
-//             ModelState.AddModelError(resultado);
+        return RedirectToAction(nameof(Listar));
+    }
 
-//             return View(cadastrarVm);
-//         }
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesCategoriaDto> resultado = servicoCategoria.SelecionarPorId(id);
 
-//         return RedirectToAction(nameof(Listar));
-//     }
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
 
-//     [HttpGet]
-//     public ActionResult Editar(Guid id)
-//     {
-//         Result<DetalhesCategoriaDto> resultado = servicoCategoria.SelecionarPorId(id);
+            return RedirectToAction(nameof(Listar));
+        }
 
-//         if (resultado.IsFailed)
-//         {
-//             TempData.AddErrorMessage(resultado);
+        EditarCategoriaViewModel editarVm = mapeador.Map<EditarCategoriaViewModel>(resultado.Value);
 
-//             return RedirectToAction(nameof(Listar));
-//         }
+        return View(editarVm);
+    }
 
-//         DetalhesCategoriaDto dto = resultado.Value;
+    [HttpPost]
+    public ActionResult Editar(EditarCategoriaViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
 
-//         EditarCategoriaViewModel editarVm = mapeador.Map<EditarCategoriaViewModel>(dto);
+        EditarCategoriaDto dto = mapeador.Map<EditarCategoriaDto>(editarVm);
 
-//         return View(editarVm);
-//     }
+        Result resultado = servicoCategoria.Editar(dto);
 
-//     [HttpPost]
-//     public ActionResult Editar(EditarCategoriaViewModel editarVm)
-//     {
-//         if (!ModelState.IsValid)
-//             return View(editarVm);
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
 
-//         EditarCategoriaDto dto = mapeador.Map<EditarCategoriaDto>(editarVm);
+            return View(editarVm);
+        }
 
-//         Result resultado = servicoCategoria.Editar(dto);
+        return RedirectToAction(nameof(Listar));
+    }
 
+    [HttpGet]
+    public ActionResult Excluir(Guid id)
+    {
+        Result<DetalhesCategoriaDto> resultado = servicoCategoria.SelecionarPorId(id);
 
-//         if (resultado.IsFailed)
-//         {
-//             ModelState.AddModelError(resultado);
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
 
-//             return View(editarVm);
-//         }
+            return RedirectToAction(nameof(Listar));
+        }
 
-//         return RedirectToAction(nameof(Listar));
-//     }
+        ExcluirCategoriaViewModel excluirVm = mapeador.Map<ExcluirCategoriaViewModel>(resultado.Value);
 
-//     [HttpGet]
-//     public ActionResult Excluir(Guid id)
-//     {
-//         Result<DetalhesCategoriaDto> resultado = servicoCategoria.SelecionarPorId(id);
+        return View(excluirVm);
+    }
 
-//         if (resultado.IsFailed)
-//         {
-//             TempData.AddErrorMessage(resultado);
+    [HttpPost]
+    public ActionResult Excluir(ExcluirCategoriaViewModel excluirVm)
+    {
+        Result resultado = servicoCategoria.Excluir(excluirVm.Id);
 
-//             return RedirectToAction(nameof(Listar));
-//         }
+        if (resultado.IsFailed)
+            TempData.AddErrorMessage(resultado);
 
-//         DetalhesCategoriaDto dto = resultado.Value;
-
-//         ExcluirCategoriaViewModel excluirVm = mapeador.Map<ExcluirCategoriaViewModel>(dto);
-
-//         return View(excluirVm);
-//     }
-
-
-//     [HttpPost]
-//     public ActionResult Excluir(ExcluirCategoriaViewModel excluirVm)
-//     {
-//         Result resultado = servicoCategoria.Excluir(excluirVm.Id);
-
-//         if (resultado.IsFailed)
-//             TempData["MensagemErro"] = resultado.Errors.First().Message;
-
-//         return RedirectToAction(nameof(Listar));
-//     }
-
-//     private List<OpcaoDespesasViewModel> SelecionarDespesas()
-//     {
-//         List<OpcaoDespesasDto> despesas = servicoCategoria.SelecionarDespesas();
-
-//         return despesas.Select(d => new OpcaoDespesasViewModel(d.Id, d.Descricao)).ToList();
-//     }
-// }
+        return RedirectToAction(nameof(Listar));
+    }
+}

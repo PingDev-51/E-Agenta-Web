@@ -1,46 +1,37 @@
-using System;
 using AutoMapper;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Aplicacao;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
-using EAgendaWeb.WebApp.Compartilhado.Apresentacao.Extensions;
 using FluentResults;
+using eAgenda.WebApp.Compartilhado.Apresentacao.Extensions;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCompromissos.Apresentacao;
+namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Apresentacao;
 
-public class CompromissosControllers : Controller
+public class CompromissoController(ServicoCompromisso servicoCompromisso, IMapper mapeador) : Controller
 {
-
-    private readonly ServicoCompromisso servicoCompromisso;
-    private readonly IMapper mapeador;
-
-    public CompromissosControllers(ServicoCompromisso servicoCompromisso, IMapper mapeador)
-    {
-        this.servicoCompromisso = servicoCompromisso;
-        this.mapeador = mapeador;
-    }
-
+    [HttpGet]
     public ActionResult Listar()
     {
         List<ListarCompromissosDto> dtos = servicoCompromisso.SelecionarTodos();
 
-        ListarCompromissosViewModels listarVm = mapeador.Map<ListarCompromissosViewModels>(dtos);
+        List<ListarCompromissosViewModel> listarVms = mapeador.Map<List<ListarCompromissosViewModel>>(dtos);
 
-        return View(listarVm);
+        return View(listarVms);
     }
 
     [HttpGet]
     public ActionResult Cadastrar()
     {
-        CadastrarCompromissosViewModels cadastrarVm = new CadastrarCompromissosViewModels(
+        CadastrarCompromissoViewModel cadastrarVm = new CadastrarCompromissoViewModel(
             string.Empty,
-            DateTime.Now,
-            DateTime.Now,
-            TipoCompromisso.Indefinido,
-            string.Empty,
-            string.Empty,
-            Guid.Empty,
+            DateTime.Today,
+            TimeSpan.Zero,
+            TimeSpan.Zero,
+            TipoCompromisso.Presencial,
+            null,
+            null,
+            null,
             SelecionarContatos()
         );
 
@@ -48,12 +39,12 @@ public class CompromissosControllers : Controller
     }
 
     [HttpPost]
-    public ActionResult Cadastrar(CadastrarCompromissosViewModels cadastrarVm)
+    public ActionResult Cadastrar(CadastrarCompromissoViewModel cadastrarVm)
     {
         if (!ModelState.IsValid)
-            return View(cadastrarVm with { Contato = SelecionarContatos() });
+            return View(cadastrarVm with { Contatos = SelecionarContatos() });
 
-        CadastrarCompromissosDto dto = mapeador.Map<CadastrarCompromissosDto>(cadastrarVm);
+        CadastrarCompromissoDto dto = mapeador.Map<CadastrarCompromissoDto>(cadastrarVm);
 
         Result resultado = servicoCompromisso.Cadastrar(dto);
 
@@ -61,7 +52,7 @@ public class CompromissosControllers : Controller
         {
             ModelState.AddModelError(resultado);
 
-            return View(cadastrarVm);
+            return View(cadastrarVm with { Contatos = SelecionarContatos() });
         }
 
         return RedirectToAction(nameof(Listar));
@@ -70,7 +61,7 @@ public class CompromissosControllers : Controller
     [HttpGet]
     public ActionResult Editar(Guid id)
     {
-        Result<DetalhesCompromissosDto> resultado = servicoCompromisso.SelecionarPorId(id);
+        Result<DetalhesCompromissoDto> resultado = servicoCompromisso.SelecionarPorId(id);
 
         if (resultado.IsFailed)
         {
@@ -79,20 +70,19 @@ public class CompromissosControllers : Controller
             return RedirectToAction(nameof(Listar));
         }
 
-        DetalhesCompromissosDto dto = resultado.Value;
-
-        EditarCompromissosViewModels editarVm = mapeador.Map<EditarCompromissosViewModels>(dto);
+        EditarCompromissoViewModel editarVm =
+            mapeador.Map<EditarCompromissoViewModel>(resultado.Value) with { Contatos = SelecionarContatos() };
 
         return View(editarVm);
     }
 
     [HttpPost]
-    public ActionResult Editar(EditarCompromissosViewModels editarVm)
+    public ActionResult Editar(EditarCompromissoViewModel editarVm)
     {
         if (!ModelState.IsValid)
-            return View(editarVm);
+            return View(editarVm with { Contatos = SelecionarContatos() });
 
-        EditarCompromissosDto dto = mapeador.Map<EditarCompromissosDto>(editarVm);
+        EditarCompromissoDto dto = mapeador.Map<EditarCompromissoDto>(editarVm);
 
         Result resultado = servicoCompromisso.Editar(dto);
 
@@ -100,7 +90,7 @@ public class CompromissosControllers : Controller
         {
             ModelState.AddModelError(resultado);
 
-            return View(editarVm);
+            return View(editarVm with { Contatos = SelecionarContatos() });
         }
 
         return RedirectToAction(nameof(Listar));
@@ -109,37 +99,35 @@ public class CompromissosControllers : Controller
     [HttpGet]
     public ActionResult Excluir(Guid id)
     {
-        Result<DetalhesCompromissosDto> resultado = servicoCompromisso.SelecionarPorId(id);
+        Result<DetalhesCompromissoDto> resultado = servicoCompromisso.SelecionarPorId(id);
 
-        DetalhesCompromissosDto dto = resultado.Value;
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
 
-        ExcluirCompromissosViewModels excluirVm = mapeador.Map<ExcluirCompromissosViewModels>(dto);
+            return RedirectToAction(nameof(Listar));
+        }
+
+        ExcluirCompromissoViewModel excluirVm = mapeador.Map<ExcluirCompromissoViewModel>(resultado.Value);
 
         return View(excluirVm);
     }
 
     [HttpPost]
-    public ActionResult Excluir(ExcluirCompromissosDto excluirVm)
+    public ActionResult Excluir(ExcluirCompromissoViewModel excluirVm)
     {
         Result resultado = servicoCompromisso.Excluir(excluirVm.Id);
 
         if (resultado.IsFailed)
-        {
-            ModelState.AddModelError(resultado);
-
-            return View(excluirVm);
-        }
+            TempData.AddErrorMessage(resultado);
 
         return RedirectToAction(nameof(Listar));
     }
 
-    private List<OpcaoContatoViewModels> SelecionarContatos()
+    private List<OpcaoContatoViewModel> SelecionarContatos()
     {
-        List<OpcaoContatoDto> contatos = servicoCompromisso.SelecionarContatos();
+        List<OpcaoContatoDto> dtos = servicoCompromisso.SelecionarContatos();
 
-        return contatos.Select(c => new OpcaoContatoViewModels(
-            c.Id,
-            c.Nome
-        )).ToList();
+        return mapeador.Map<List<OpcaoContatoViewModel>>(dtos);
     }
 }

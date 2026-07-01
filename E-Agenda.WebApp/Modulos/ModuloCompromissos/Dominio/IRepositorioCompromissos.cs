@@ -1,6 +1,5 @@
-using System;
-using EAgendaWeb.WebApp.Compartilhado.Dominio;
+using eAgenda.WebApp.Compartilhado.Dominio;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
+namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 
-public interface IRepositorioCompromissos : IRepositorio<Compromissos>;
+public interface IRepositorioCompromisso : IRepositorio<Compromisso>;

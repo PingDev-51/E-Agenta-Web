@@ -1,9 +1,11 @@
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Aplicacao;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
-using EAgendaWeb.WebApp.Compartilhado.Aplicacao.Logging;
-using EAgendaWeb.WebApp.Modulos.ModuloTarefas.Aplicacao;
+using eAgenda.WebApp.Compartilhado.Aplicacao.Logging;
+using eAgenda.WebApp.Modulos.ModuloCategoria.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloContato.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloDespesa.Aplicacao;
+using eAgenda.WebApp.Modulos.ModuloTarefa.Aplicacao;
 
-namespace EAgendaWeb.WebApp.Compartilhado.Aplicacao;
+namespace eAgenda.WebApp.Compartilhado.Aplicacao;
 
 public static class InjecaoDependencia
 {
@@ -13,9 +15,12 @@ public static class InjecaoDependencia
         ILoggingBuilder logging
     )
     {
-        // services.AddSerilogLogger(configuration, logging);
-        services.AddScoped<ServicoTarefa>();
+        services.AddSerilogLogger(configuration, logging);
+
         services.AddScoped<ServicoContato>();
         services.AddScoped<ServicoCompromisso>();
+        services.AddScoped<ServicoCategoria>();
+        services.AddScoped<ServicoDespesa>();
+        services.AddScoped<ServicoTarefa>();
     }
 }

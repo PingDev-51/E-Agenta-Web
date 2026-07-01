@@ -1,71 +1,67 @@
 using System.ComponentModel.DataAnnotations;
-using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Apresentacao;
+namespace eAgenda.WebApp.Modulos.ModuloDespesa.Apresentacao;
 
-public record ListarDespesaViewModel(
+public record ListarDespesasViewModel(
     Guid Id,
     string Descricao,
     DateTime DataOcorrencia,
     decimal Valor,
-    FormaPagamento FormaPagamento
-    // List<string> Categorias
+    FormaPagamento FormaPagamento,
+    List<CategoriaDespesaViewModel> Categorias
 );
 
-public record CadastroDespesaViewModel(
-    [Required(ErrorMessage = "O campo \"Descrição\" é obrigatório!")]
-    [StringLength(100, MinimumLength = 2,
-        ErrorMessage = "O campo \"Descrição\" deve conter entre 2 e 100 caracteres.")]
+public record CadastrarDespesaViewModel(
+    [Required(ErrorMessage = "O campo \"Descrição\" deve ser preenchido.")]
+    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo \"Descrição\" deve conter entre 2 e 100 caracteres.")]
     string Descricao,
 
+    [DataType(DataType.Date)]
     DateTime? DataOcorrencia,
 
-    [Required(ErrorMessage = "O campo \"Valor\" é obrigatório!")]
-    [Range(typeof(decimal), "0.01", "9999999999",
-        ErrorMessage = "O valor deve ser maior que zero.")]
+    [Range(0.01, double.MaxValue, ErrorMessage = "O campo \"Valor\" deve ser maior que zero.")]
     decimal Valor,
 
-    [Required(ErrorMessage = "O campo \"Forma de Pagamento\" é obrigatório!")]
-    FormaPagamento FormaPagamento
+    [Required(ErrorMessage = "O campo \"Forma de Pagamento\" deve ser preenchido.")]
+    FormaPagamento FormaPagamento,
 
-    // [Required(ErrorMessage = "Selecione pelo menos uma categoria.")]
-    // List<Guid> CategoriasIds
-)
-{
-    // public List<SelectListItem> CategoriasDisponiveis { get; set; } = [];
-}
+    List<Guid> CategoriaIds,
+
+    [ValidateNever]
+    List<CategoriaDespesaViewModel> Categorias
+);
+
+public record EditarDespesaViewModel(
+    Guid Id,
+
+    [Required(ErrorMessage = "O campo \"Descrição\" deve ser preenchido.")]
+    [StringLength(100, MinimumLength = 2, ErrorMessage = "O campo \"Descrição\" deve conter entre 2 e 100 caracteres.")]
+    string Descricao,
+
+    [DataType(DataType.Date)]
+    DateTime? DataOcorrencia,
+
+    [Range(0.01, double.MaxValue, ErrorMessage = "O campo \"Valor\" deve ser maior que zero.")]
+    decimal Valor,
+
+    [Required(ErrorMessage = "O campo \"Forma de Pagamento\" deve ser preenchido.")]
+    FormaPagamento FormaPagamento,
+
+    List<Guid> CategoriaIds,
+
+    [ValidateNever]
+    List<CategoriaDespesaViewModel> Categorias
+);
 
 public record ExcluirDespesaViewModel(
     Guid Id,
     string Descricao,
     DateTime DataOcorrencia,
     decimal Valor,
-    FormaPagamento FormaPagamento
-    // List<string> Categorias
+    FormaPagamento FormaPagamento,
+    List<CategoriaDespesaViewModel> Categorias
 );
 
-public record EditarDespesaViewModel(
-    Guid Id,
-
-    [Required(ErrorMessage = "O campo \"Descrição\" é obrigatório!")]
-    [StringLength(100, MinimumLength = 2,
-        ErrorMessage = "O campo \"Descrição\" deve conter entre 2 e 100 caracteres.")]
-    string Descricao,
-
-    DateTime DataOcorrencia,
-
-    [Required(ErrorMessage = "O campo \"Valor\" é obrigatório!")]
-    [Range(typeof(decimal), "0.01", "9999999999",
-        ErrorMessage = "O valor deve ser maior que zero.")]
-    decimal Valor,
-
-    [Required(ErrorMessage = "O campo \"Forma de Pagamento\" é obrigatório!")]
-    FormaPagamento FormaPagamento
-
-    // [Required(ErrorMessage = "Selecione pelo menos uma categoria.")]
-    // List<Guid> CategoriasIds
-)
-{
-    // public List<SelectListItem> CategoriasDisponiveis { get; set; } = [];
-}
+public record CategoriaDespesaViewModel(Guid Id, string Titulo);

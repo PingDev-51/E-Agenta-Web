@@ -1,160 +1,171 @@
-using System;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Apresentacao;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Dominio;
-using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using FluentResults;
+using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
+using eAgenda.WebApp.Modulos.ModuloContato.Dominio;
+using eAgenda.WebApp.Compartilhado.Aplicacao;
 
-namespace E_Agenda.WebApp.Modulos.ModuloCompromissos.Aplicacao;
+namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
 
-public class ServicoCompromisso
+public class ServicoCompromisso : ServicoBase<Compromisso>
 {
-    private readonly IRepositorioCompromissos repositorioCompromissos;
-    private readonly IRepositorioContatos repositorioContatos;
+    private readonly IRepositorioCompromisso repositorioCompromisso;
+    private readonly IRepositorioContato repositorioContato;
 
-    public ServicoCompromisso(IRepositorioCompromissos repositorioCompromissos, IRepositorioContatos repositorioContatos)
+    public ServicoCompromisso(
+        IRepositorioCompromisso repositorioCompromisso,
+        IRepositorioContato repositorioContato
+    )
     {
-        this.repositorioCompromissos = repositorioCompromissos;
-        this.repositorioContatos = repositorioContatos;
+        this.repositorioCompromisso = repositorioCompromisso;
+        this.repositorioContato = repositorioContato;
     }
 
-    public Result Cadastrar(CadastrarCompromissosDto dto)
+    public Result Cadastrar(CadastrarCompromissoDto dto)
     {
-        Contatos? contatoSelecionado = repositorioContatos.SelecionarPorId(dto.contatoId);
+        Result<Contato?> resultadoContato = SelecionarContatoOpcional(dto.ContatoId);
 
-        if (contatoSelecionado == null)
-            return Falha("Não foi possivel encontrar um contato", "contato");
+        if (resultadoContato.IsFailed)
+            return resultadoContato.ToResult();
 
-        // implementar logica de apresentação para tipo de compromisso
+        Compromisso novoCompromisso = new Compromisso(
+            dto.Assunto,
+            dto.DataOcorrencia,
+            dto.HoraInicio,
+            dto.HoraTermino,
+            dto.Tipo,
+            dto.Local,
+            dto.Link,
+            resultadoContato.Value
+        );
 
-        if (!ERemoto(dto)) // testar se a logica deu certo
-        {
-            Compromissos novoCompromisso = new Compromissos(
-                dto.Assunto,
-                dto.HoraDeInicio,
-                dto.HoraDeTermino,
-                dto.TipoDeCompromisso,
-                dto.Local,
-                contato: contatoSelecionado!
-            );
+        Result resultadoValidacao = ValidarEntidade(novoCompromisso);
 
-            repositorioCompromissos.Cadastrar(novoCompromisso);
-        }
-        else
-        {
-            Compromissos novoCompromisso = new Compromissos(
-                dto.Assunto,
-                dto.HoraDeInicio,
-                dto.HoraDeTermino,
-                dto.TipoDeCompromisso,
-                dto.Link,
-                contato: contatoSelecionado!
-            );
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
 
-            repositorioCompromissos.Cadastrar(novoCompromisso);
-        }
+        if (ExisteConflitoDeHorario(novoCompromisso))
+            return Falha(string.Empty, "Já existe um compromisso cadastrado neste intervalo de horário.");
 
+        repositorioCompromisso.Cadastrar(novoCompromisso);
 
         return Result.Ok();
     }
 
-    public Result Editar(EditarCompromissosDto dto)
+    public Result Editar(EditarCompromissoDto dto)
     {
-        Contatos? contatoSelecionado = repositorioContatos.SelecionarPorId(dto.contatoId);
+        Result<Contato?> resultadoContato = SelecionarContatoOpcional(dto.ContatoId);
 
-        if (contatoSelecionado == null)
-            return Falha("Não foi possivel encontrar um contato", "contato");
+        if (resultadoContato.IsFailed)
+            return resultadoContato.ToResult();
 
-        Compromissos compromissoAtualizado = new Compromissos(
+        Compromisso compromissoAtualizado = new Compromisso(
             dto.Assunto,
-            dto.HoraDeInicio,
-            dto.HoraDeTermino,
-            dto.TipoDeCompromisso,
+            dto.DataOcorrencia,
+            dto.HoraInicio,
+            dto.HoraTermino,
+            dto.Tipo,
             dto.Local,
             dto.Link,
-            contatoSelecionado!
+            resultadoContato.Value
         );
 
-        bool conseguiuEditar = repositorioCompromissos.Editar(dto.Id, compromissoAtualizado);
+        Result resultadoValidacao = ValidarEntidade(compromissoAtualizado);
+
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
+
+        if (ExisteConflitoDeHorario(compromissoAtualizado, dto.Id))
+            return Falha(string.Empty, "Já existe um compromisso cadastrado neste intervalo de horário.");
+
+        bool conseguiuEditar = repositorioCompromisso.Editar(dto.Id, compromissoAtualizado);
 
         if (!conseguiuEditar)
-            return Result.Fail("Contato nao encontrado");
+            return Falha(string.Empty, "Compromisso não encontrado.");
 
         return Result.Ok();
     }
 
     public Result Excluir(Guid id)
     {
-        Compromissos? compromissos = repositorioCompromissos.SelecionarPorId(id);
+        Compromisso? compromisso = repositorioCompromisso.SelecionarPorId(id);
 
-        if (compromissos == null)
-            return Result.Fail("Compromissos não encontrado");
+        if (compromisso == null)
+            return Falha(string.Empty, "Compromisso não encontrado.");
 
-        repositorioCompromissos.Excluir(compromissos.Id);
+        repositorioCompromisso.Excluir(id);
 
         return Result.Ok();
     }
 
-    public Result<DetalhesCompromissosDto> SelecionarPorId(Guid id)
-    {
-        Compromissos? compromissos = repositorioCompromissos.SelecionarPorId(id);
-
-        if (compromissos == null)
-            return Result.Fail("Compromissos não encontrado");
-
-        return Result.Ok(new DetalhesCompromissosDto(
-            compromissos.Assunto,
-            compromissos.DataOcorrencia,
-            compromissos.HoraDeInicio,
-            compromissos.HoraDeTermino,
-            compromissos.TipoDeCompromisso,
-            compromissos.Local,
-            compromissos.Link,
-            compromissos.Contato!.Id,
-            SelecionarContatos()
-        ));
-    }
-
     public List<ListarCompromissosDto> SelecionarTodos()
     {
-        List<Compromissos> compromissos = repositorioCompromissos.SelecionarTodos();
-
-        return compromissos.Select(c => new ListarCompromissosDto(
-            c.Id,
-            c.Assunto,
-            c.DataOcorrencia,
-            c.HoraDeInicio,
-            c.HoraDeTermino,
-            c.TipoDeCompromisso,
-            c.Local,
-            c.Link,
-            c.Contato!.Nome
-        )).ToList();
+        return repositorioCompromisso
+            .SelecionarTodos()
+            .Select(c => new ListarCompromissosDto(
+                c.Id,
+                c.Assunto,
+                c.DataOcorrencia,
+                c.HoraInicio,
+                c.HoraTermino,
+                c.Tipo,
+                c.Local,
+                c.Link,
+                c.Contato?.Id,
+                c.Contato?.Nome
+            ))
+            .ToList();
     }
 
-    private static Result Falha(string campo, string mensagem)
+    public Result<DetalhesCompromissoDto> SelecionarPorId(Guid id)
     {
-        IError erro = new Error(mensagem).WithMetadata("Campo", campo);
+        Compromisso? compromisso = repositorioCompromisso.SelecionarPorId(id);
 
-        return Result.Fail(erro);
+        if (compromisso == null)
+            return Result.Fail("Compromisso não encontrado.");
+
+        return Result.Ok(new DetalhesCompromissoDto(
+            compromisso.Id,
+            compromisso.Assunto,
+            compromisso.DataOcorrencia,
+            compromisso.HoraInicio,
+            compromisso.HoraTermino,
+            compromisso.Tipo,
+            compromisso.Local,
+            compromisso.Link,
+            compromisso.Contato?.Id,
+            compromisso.Contato?.Nome
+        ));
     }
 
     public List<OpcaoContatoDto> SelecionarContatos()
     {
-        List<Contatos> contatos = repositorioContatos.SelecionarTodos();
-
-        return contatos
-            .Select(contatos => new OpcaoContatoDto(contatos.Id, contatos.Nome))
+        return repositorioContato
+            .SelecionarTodos()
+            .Select(c => new OpcaoContatoDto(c.Id, c.Nome))
             .ToList();
     }
 
-    private bool ERemoto(CadastrarCompromissosDto dto)
+    private Result<Contato?> SelecionarContatoOpcional(Guid? contatoId)
     {
-        List<Compromissos> compromissos = repositorioCompromissos.SelecionarTodos();
+        if (contatoId == null || contatoId == Guid.Empty)
+            return Result.Ok<Contato?>(null);
 
-        if (dto.TipoDeCompromisso == TipoCompromisso.Remoto)
-            return true;
+        Contato? contato = repositorioContato.SelecionarPorId(contatoId.Value);
 
-        return false;
+        if (contato == null)
+            return Result.Fail<Contato?>(new Error("Selecione um contato válido.").WithMetadata("Campo", nameof(CadastrarCompromissoDto.ContatoId)));
+
+        return Result.Ok<Contato?>(contato);
+    }
+
+    private bool ExisteConflitoDeHorario(Compromisso compromisso, Guid? idIgnorado = null)
+    {
+        return repositorioCompromisso
+            .SelecionarTodos()
+            .Any(c =>
+                c.Id != idIgnorado &&
+                c.DataOcorrencia.Date == compromisso.DataOcorrencia.Date &&
+                compromisso.HoraInicio < c.HoraTermino &&
+                compromisso.HoraTermino > c.HoraInicio
+            );
     }
 }

@@ -1,7 +1,7 @@
 using FluentResults;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace EAgendaWeb.WebApp.Compartilhado.Apresentacao.Extensions;
+namespace eAgenda.WebApp.Compartilhado.Apresentacao.Extensions;
 
 public static class TempDataExtensions
 {

@@ -1,10 +1,10 @@
-@using E_Agenda.WebApp.Modulos.ModuloCompromissos.Apresentacao
+@using eAgenda.WebApp.Modulos.ModuloCompromisso.Apresentacao
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Listagem de Compromissos";
 }
 
-@model List<ListarCompromissosViewModels>;
+@model List<ListarCompromissosViewModel>;
 
 <a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">Cadastrar Novo</a>
 
@@ -24,14 +24,14 @@
 else
 {
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2">
-        @foreach (ListarCompromissosViewModels c in Model)
+        @foreach (ListarCompromissosViewModel c in Model)
         {
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
                             <h5 class="card-title mb-0">@c.Assunto</h5>
-                            <span class="badge text-bg-primary rounded-pill">@c.TipoDeCompromisso</span>
+                            <span class="badge text-bg-primary rounded-pill">@c.Tipo</span>
                         </div>
 
                         <dl class="row g-2 mb-4">
@@ -39,12 +39,11 @@ else
                             <dd class="col-7 mb-0">@c.DataOcorrencia.ToString("dd/MM/yyyy")</dd>
 
                             <dt class="col-5 text-secondary fw-semibold">Horário</dt>
-                            <dd class="col-7 mb-0">@c.HoraDeIncio.ToString(@"hh\:mm") - @c.HoraDeTermino.ToString(@"hh\:mm")
-                            </dd>
+                            <dd class="col-7 mb-0">@c.HoraInicio.ToString(@"hh\:mm") - @c.HoraTermino.ToString(@"hh\:mm")</dd>
 
                             <dt class="col-5 text-secondary fw-semibold">Contato</dt>
-                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Contato) ? "Não informado" :
-                                                        c.Contato)</dd>
+                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.ContatoNome) ? "Não informado" :
+                                                        c.ContatoNome)</dd>
 
                                 <dt class="col-5 text-secondary fw-semibold">Local</dt>
                                 <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Local) ? "Não informado" : c.Local)

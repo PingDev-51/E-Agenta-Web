@@ -1,21 +1,21 @@
-// using Serilog;
-// using Serilog.Core;
+using Serilog;
+using Serilog.Core;
 
-// namespace EAgendaWeb.WebApp.Compartilhado.Aplicacao.Logging;
+namespace eAgenda.WebApp.Compartilhado.Aplicacao.Logging;
 
-// public static class SerilogLoggerFactory
-// {
-//     public static void AddSerilogLogger(
-//         this IServiceCollection services,
-//         IConfiguration configuration,
-//         ILoggingBuilder logging
-//     )
-//     {
-//         Log.Logger = SerilogFactory.Create(configuration);
+public static class SerilogLoggerFactory
+{
+    public static void AddSerilogLogger(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        ILoggingBuilder logging
+    )
+    {
+        Log.Logger = SerilogFactory.Create(configuration);
 
-//         // Remove o provedor padrão de logs da Microsoft
-//         logging.ClearProviders();
+        // Remove o provedor padrão de logs da Microsoft
+        logging.ClearProviders();
 
-//         services.AddSerilog(Log.Logger);
-//     }
-// }
+        services.AddSerilog(Log.Logger);
+    }
+}

@@ -1,8 +1,9 @@
-namespace EAgendaWeb.WebApp.Compartilhado.Aplicacao.Logging;
+namespace eAgenda.WebApp.Compartilhado.Aplicacao.Logging;
 
 public sealed class NewRelicOptions
 {
     public const string SectionName = "NewRelic";
+
     public string EndpointUrl { get; set; } = string.Empty;
     public string ApplicationName { get; set; } = string.Empty;
     public string? LicenseKey { get; set; }

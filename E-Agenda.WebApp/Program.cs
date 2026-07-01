@@ -1,6 +1,6 @@
-using EAgendaWeb.WebApp.Compartilhado.Aplicacao;
-using EAgendaWeb.WebApp.Compartilhado.Apresentacao;
-using EAgendaWeb.WebApp.Compartilhado.Infra;
+using eAgenda.WebApp.Compartilhado.Aplicacao;
+using eAgenda.WebApp.Compartilhado.Apresentacao;
+using eAgenda.WebApp.Compartilhado.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
 

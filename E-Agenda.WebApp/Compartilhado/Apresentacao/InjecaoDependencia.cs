@@ -1,6 +1,6 @@
-using EAgendaWeb.WebApp.Compartilhado.Apresentacao.Mapping;
+using eAgenda.WebApp.Compartilhado.Apresentacao.Mapping;
 
-namespace EAgendaWeb.WebApp.Compartilhado.Apresentacao;
+namespace eAgenda.WebApp.Compartilhado.Apresentacao;
 
 public static class InjecaoDependencia
 {

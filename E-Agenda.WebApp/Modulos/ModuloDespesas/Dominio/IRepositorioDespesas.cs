@@ -1,5 +1,5 @@
-using EAgendaWeb.WebApp.Compartilhado.Dominio;
+using eAgenda.WebApp.Compartilhado.Dominio;
 
-namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Dominio;
+namespace eAgenda.WebApp.Modulos.ModuloDespesa.Dominio;
 
-public interface IRepositorioDespesas : IRepositorio<Despesas>;
+public interface IRepositorioDespesa : IRepositorio<Despesa>;

@@ -26,6 +26,7 @@ public record EditarContatosDto(
     string? Empresa
 );
 public record DetalhesContatosDto(
+    Guid Id,
     string Nome,
     string Email,
     string Telefone,

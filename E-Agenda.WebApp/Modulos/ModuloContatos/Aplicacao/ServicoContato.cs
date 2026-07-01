@@ -93,6 +93,7 @@ public class ServicoContato
             return Result.Fail("Contato não encontrado");
 
         return Result.Ok(new DetalhesContatosDto(
+            contato.Id,
             contato.Nome,
             contato.Email,
             contato.Telefone,

@@ -18,13 +18,14 @@ public class ContatosController : Controller
         this.mapeador = mapeador;
     }
 
+    [HttpGet]
     public ActionResult Listar()
     {
         List<ListarContatosDto> dtos = servicoContato.SelecionarTodos();
 
-        List<ListarContatosViewModel> listarVm = mapeador.Map<List<ListarContatosViewModel>>(dtos);
+        List<ListarContatosViewModel> listarVms = mapeador.Map<List<ListarContatosViewModel>>(dtos);
 
-        return View(listarVm);
+        return View(listarVms);
     }
 
     [HttpGet]
@@ -34,13 +35,12 @@ public class ContatosController : Controller
             string.Empty,
             string.Empty,
             string.Empty,
-            string.Empty,
-            string.Empty
+            null,
+            null
         );
 
         return View(cadastrarVm);
     }
-
 
     [HttpPost]
     public ActionResult Cadastrar(CadastrarContatosViewModel cadastrarVm)
@@ -74,12 +74,10 @@ public class ContatosController : Controller
             return RedirectToAction(nameof(Listar));
         }
 
-
         EditarContatosViewModel editarVm = mapeador.Map<EditarContatosViewModel>(resultado.Value);
 
         return View(editarVm);
     }
-
 
     [HttpPost]
     public ActionResult Editar(EditarContatosViewModel editarVm)
@@ -109,11 +107,11 @@ public class ContatosController : Controller
         if (resultado.IsFailed)
         {
             TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
         }
 
-        DetalhesContatosDto dto = resultado.Value;
-
-        ExcluirContatosViewModel excluirVm = mapeador.Map<ExcluirContatosViewModel>(dto);
+        ExcluirContatosViewModel excluirVm = mapeador.Map<ExcluirContatosViewModel>(resultado.Value);
 
         return View(excluirVm);
     }
@@ -124,9 +122,7 @@ public class ContatosController : Controller
         Result resultado = servicoContato.Excluir(excluirVm.Id);
 
         if (resultado.IsFailed)
-        {
             TempData.AddErrorMessage(resultado);
-        }
 
         return RedirectToAction(nameof(Listar));
     }

@@ -323,6 +323,22 @@
           }
         }
       },
+      "Serilog/4.3.1": {
+        "type": "package",
+        "compile": {
+          "lib/net10.0/Serilog.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net10.0/Serilog.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Serilog.targets": {}
+        }
+      },
       "SqlConnection/1.0.4": {
         "type": "package",
         "dependencies": {
@@ -888,6 +904,35 @@
         "version.txt"
       ]
     },
+    "Serilog/4.3.1": {
+      "sha512": "savYe7h5yRlkqBVOwP8cIRDOdqKiPmYCU4W87JH38sBmcKD5EBoXvQIw6bNEvZ/pTe1gsiye3VFCzBsoppGkXQ==",
+      "type": "package",
+      "path": "serilog/4.3.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "build/Serilog.targets",
+        "buildTransitive/Serilog.targets",
+        "icon.png",
+        "lib/net10.0/Serilog.dll",
+        "lib/net10.0/Serilog.xml",
+        "lib/net462/Serilog.dll",
+        "lib/net462/Serilog.xml",
+        "lib/net471/Serilog.dll",
+        "lib/net471/Serilog.xml",
+        "lib/net6.0/Serilog.dll",
+        "lib/net6.0/Serilog.xml",
+        "lib/net8.0/Serilog.dll",
+        "lib/net8.0/Serilog.xml",
+        "lib/net9.0/Serilog.dll",
+        "lib/net9.0/Serilog.xml",
+        "lib/netstandard2.0/Serilog.dll",
+        "lib/netstandard2.0/Serilog.xml",
+        "serilog.4.3.1.nupkg.sha512",
+        "serilog.nuspec"
+      ]
+    },
     "SqlConnection/1.0.4": {
       "sha512": "JDjswSKyrDs/A32Wq1Dsu/5VDQNLPWuVsCJzFilTKFMzTW2kLxroRtHNtEvZ1ZyYhomp1EGAqgJRIM9NI7c0Vw==",
       "type": "package",
@@ -1116,6 +1161,7 @@
       "Dapper >= 2.1.79",
       "FluentResults >= 4.0.0",
       "Microsoft.Data.SqlClient >= 7.0.2",
+      "Serilog >= 4.3.1",
       "SqlConnection >= 1.0.4"
     ]
   },
@@ -1184,6 +1230,10 @@
           "Microsoft.Data.SqlClient": {
             "target": "Package",
             "version": "[7.0.2, )"
+          },
+          "Serilog": {
+            "target": "Package",
+            "version": "[4.3.1, )"
           },
           "SqlConnection": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

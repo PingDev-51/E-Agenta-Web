@@ -1,9 +1,7 @@
-using System;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using FluentResults;
 using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
+using E_Agenda.WebApp.Modulos.ModuloContatos.Dominio;
 
 namespace E_Agenda.WebApp.Modulos.ModuloContatos.Aplicacao;
 
@@ -28,7 +26,7 @@ public class ServicoContato
             dto.Email,
             dto.Telefone,
             dto.Cargo!,
-            dto.Empresa
+            dto.Empresa!
         );
 
         repositorioContato.Cadastrar(novoContato);
@@ -44,8 +42,8 @@ public class ServicoContato
             dto.Nome,
             dto.Email,
             dto.Telefone,
-            dto.Cargo,
-            dto.Empresa
+            dto.Cargo!,
+            dto.Empresa!
         );
 
         bool conseguiuEditar = repositorioContato.Editar(dto.Id, ContatoAtualizado);

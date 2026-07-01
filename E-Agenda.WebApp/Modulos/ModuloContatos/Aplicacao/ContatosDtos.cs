@@ -7,28 +7,28 @@ public record ListarContatosDto(
     string Nome,
     string Email,
     string Telefone,
-    string Cargo,
-    string Empresa
+    string? Cargo,
+    string? Empresa
 );
 public record CadastrarContatosDto(
     string Nome,
     string Email,
     string Telefone,
-    string Cargo,
-    string Empresa
+    string? Cargo,
+    string? Empresa
 );
 public record EditarContatosDto(
     Guid Id,
     string Nome,
     string Email,
     string Telefone,
-    string Cargo,
-    string Empresa
+    string? Cargo,
+    string? Empresa
 );
 public record DetalhesContatosDto(
     string Nome,
     string Email,
     string Telefone,
-    string Cargo,
-    string Empresa
+    string? Cargo,
+    string? Empresa
 );

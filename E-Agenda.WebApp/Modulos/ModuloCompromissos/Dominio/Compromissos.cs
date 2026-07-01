@@ -1,4 +1,5 @@
 using System;
+using E_Agenda.WebApp.Modulos.ModuloContatos.Dominio;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using EAgendaWeb.WebApp.Compartilhado.Dominio;
 
@@ -14,6 +15,8 @@ public class Compromissos : EntidadeBase<Compromissos>
     public string Local { get; set; } = string.Empty;
     public string Link { get; set; } = string.Empty;
     public Contatos? Contato { get; set; } = null;
+
+    public Compromissos() { }
 
     public Compromissos(string assunto, DateTime horaDeInicio, DateTime horaDeTermino, TipoCompromisso tipoDeCompromisso, string local = null, string link = null, Contatos? contato = null)
     {

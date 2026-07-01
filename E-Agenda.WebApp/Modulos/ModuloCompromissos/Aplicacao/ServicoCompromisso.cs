@@ -1,6 +1,7 @@
 using System;
 using E_Agenda.WebApp.Modulos.ModuloCompromissos.Apresentacao;
 using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
+using E_Agenda.WebApp.Modulos.ModuloContatos.Dominio;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using FluentResults;
 

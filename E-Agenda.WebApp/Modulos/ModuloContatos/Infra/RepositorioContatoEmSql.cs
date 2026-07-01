@@ -1,5 +1,6 @@
 using System;
 using Dapper;
+using E_Agenda.WebApp.Modulos.ModuloContatos.Dominio;
 using E_Agenda.WebApp.Modulos.ModuloContatos.Domionio;
 using EAgendaWeb.WebApp.Compartilhado.Infra.Sql;
 using Microsoft.Data.SqlClient;

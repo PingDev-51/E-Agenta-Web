@@ -74,9 +74,8 @@ public class ContatosController : Controller
             return RedirectToAction(nameof(Listar));
         }
 
-        DetalhesContatosDto dto = resultado.Value;
 
-        EditarContatosViewModel editarVm = mapeador.Map<EditarContatosViewModel>(dto);
+        EditarContatosViewModel editarVm = mapeador.Map<EditarContatosViewModel>(resultado.Value);
 
         return View(editarVm);
     }

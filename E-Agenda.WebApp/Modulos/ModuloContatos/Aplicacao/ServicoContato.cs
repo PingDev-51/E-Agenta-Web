@@ -27,7 +27,7 @@ public class ServicoContato
             dto.Nome,
             dto.Email,
             dto.Telefone,
-            dto.Cargo,
+            dto.Cargo!,
             dto.Empresa
         );
 

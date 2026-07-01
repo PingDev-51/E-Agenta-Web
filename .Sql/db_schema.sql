@@ -12,8 +12,8 @@ CREATE TABLE [dbo].[TBContato]
     [Nome] nvarchar(100) NOT NULL,
     [Email] nvarchar(100) NOT NULL,
     [Telefone] nvarchar(12) NOT NULL,
-    [Cargo] nvarchar(100) NOT NULL,
-    [Empresa] nvarchar(100) NOT NULL,
+    [Cargo] nvarchar(100) NULL,
+    [Empresa] nvarchar(100) NULL,
     PRIMARY KEY ([Id])
 );
 

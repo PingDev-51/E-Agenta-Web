@@ -14,6 +14,7 @@ public class Contatos : EntidadeBase<Contatos>
 
     //Adicionar um compromisso
 
+    public Contatos() { }
 
     public Contatos(string nome, string email, string telefone, string cargo = null, string empresa = null)
     {

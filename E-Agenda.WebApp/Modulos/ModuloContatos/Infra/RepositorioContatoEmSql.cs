@@ -30,21 +30,19 @@ public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : 
         );
     """;
 
-    private const string AtualizarStatusSql = """
-        UPDATE dbo.TBItensTarefa
+    protected const string atualizarSql = """
+        UPDATE dbo.TBContato
         SET
-            Id, = @Id,
-            Nome, = @Nome,
-            Email, = @Email,
-            Telefone, = @Telefone,
-            Cargo, =  @Cargo,
+            Nome = @Nome,
+            Email = @Email,
+            Telefone = @Telefone,
+            Cargo = @Cargo,
             Empresa = @Empresa
-
         WHERE Id = @Id;
     """;
 
     private const string ExcluirSql = """
-        DELETE FROM dbo.TBItensTarefa
+        DELETE FROM dbo.TBContato
         WHERE Id = @Id;
     """;
 
@@ -57,7 +55,6 @@ public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : 
     private const string SelecionarTodosSql = """
         SELECT Id, Nome, Email, Telefone, Cargo, Empresa
         FROM dbo.TBContato
-        WHERE Id = @Id
         ORDER BY [Nome];
     """;
     public void Cadastrar(Contatos entidade)
@@ -71,22 +68,32 @@ public class RepositorioContatoEmSql(ISqlConnectionFactory connectionFactory) : 
 
     public bool Editar(Guid idSelecionado, Contatos entidadeAtualizada)
     {
-        throw new NotImplementedException();
+        using SqlConnection conexao = connectionFactory.CreateConnection();
+
+        conexao.Open();
+
+        return conexao.Execute(atualizarSql, entidadeAtualizada) == 1;
     }
 
     public bool Excluir(Guid idSelecionado)
     {
-        throw new NotImplementedException();
+        using SqlConnection conexao = connectionFactory.CreateConnection();
+
+        return conexao.Execute(ExcluirSql, new { Id = idSelecionado }) == 1;
     }
 
     public List<Contatos> Filtrar(Predicate<Contatos> filtro)
     {
-        throw new NotImplementedException();
+        return SelecionarTodos().FindAll(filtro);
     }
 
     public Contatos? SelecionarPorId(Guid idSelecionado)
     {
-        throw new NotImplementedException();
+        using SqlConnection conexao = connectionFactory.CreateConnection();
+
+        conexao.Open();
+
+        return conexao.QuerySingleOrDefault<Contatos>(SelecionarPorIdSql, new { Id = idSelecionado });
     }
 
     public List<Contatos> SelecionarTodos()

@@ -64,14 +64,36 @@ else
                                 @c.Telefone
                             </dd>
 
-                            <dt class="col-5 text-secondary">Cargo</dt>
-                            <dd class="col-7">
-                                @c.Cargo
-                            </dd>
-                            <dt class="col-5 text-secondary">Empresa</dt>
-                            <dd class="col-7">
-                                @c.Empresa
-                            </dd>
+                            @if (c.Cargo == "")
+                            {
+                                <dt class="col-5 text-secondary">Cargo</dt>
+                                <dd class="col-7">
+                                    N/A
+                                </dd>
+                            }
+                            else
+                            {
+                                <dt class="col-5 text-secondary">Cargo</dt>
+                                <dd class="col-7">
+                                    @c.Cargo
+                                </dd>
+                            }
+
+
+                            @if (c.Empresa == "")
+                            {
+                                <dt class="col-5 text-secondary">Empresa</dt>
+                                <dd class="col-7">
+                                    N/A
+                                </dd>
+                            }
+                            else
+                            {
+                                <dt class="col-5 text-secondary">Empresa</dt>
+                                <dd class="col-7">
+                                    @c.Empresa
+                                </dd>
+                            }
 
                         </dl>
 

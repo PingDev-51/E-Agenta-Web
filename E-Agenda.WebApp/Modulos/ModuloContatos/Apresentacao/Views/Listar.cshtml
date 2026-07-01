@@ -1,0 +1,95 @@
+@using EAgendaWeb.WebApp.Modulos.ModuloDespesas.Apresentacao
+@using E_Agenda.WebApp.Modulos.ModuloContatos.Apresentacao
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem de contatos";
+}
+
+@model List<ListarContatosViewModel>
+
+<a class="btn btn-outline-primary rounded-pill px-4 mb-3" asp-action="Cadastrar">
+    Cadastrar Novo
+</a>
+
+@if (TempData["MensagemErro"] is string mensagemErro)
+{
+    <div class="alert alert-danger border-start border-danger border-4 rounded-3">
+        @mensagemErro
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-primary border-start border-primary border-4 rounded-3">
+        Nenhum Contato cadastrado.
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+
+        @foreach (var c in Model)
+        {
+            <div class="col">
+
+                <div class="card h-100">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+
+                            <h5 class="card-title mb-0">@c.Nome</h5>
+
+                            <span class="badge text-bg-primary rounded-pill">
+                                @c.Id.ToString().Substring(0, 8)
+                            </span>
+
+                        </div>
+
+                        <dl class="row">
+
+                            <dt class="col-5 text-secondary">Nome</dt>
+                            <dd class="col-7">
+                                @c.Nome
+                            </dd>
+
+                            <dt class="col-5 text-secondary">Email</dt>
+                            <dd class="col-7">
+                                @c.Email
+                            </dd>
+
+                            <dt class="col-5 text-secondary">Telefone</dt>
+                            <dd class="col-7">
+                                @c.Telefone
+                            </dd>
+
+                            <dt class="col-5 text-secondary">Cargo</dt>
+                            <dd class="col-7">
+                                @c.Cargo
+                            </dd>
+                            <dt class="col-5 text-secondary">Empresa</dt>
+                            <dd class="col-7">
+                                @c.Empresa
+                            </dd>
+
+                        </dl>
+
+                        <div class="d-flex justify-content-end gap-2">
+
+                            <a asp-action="Editar" asp-route-id="@c.Id"
+                               class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                Editar
+                            </a>
+
+                            <a asp-action="Excluir" asp-route-id="@c.Id"
+                               class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

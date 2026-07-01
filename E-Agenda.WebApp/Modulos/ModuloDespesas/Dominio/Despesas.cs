@@ -13,7 +13,7 @@ public class Despesas : EntidadeBase<Despesas>
 
     public FormaPagamento FormaPagamento { get; set; }
 
-    public List<Categoria>? Categorias { get; set; } = null;
+    // public List<Categoria>? Categorias { get; set; } = null;
 
     public Despesas() { }
 
@@ -27,9 +27,8 @@ public class Despesas : EntidadeBase<Despesas>
         Descricao = descricao;
         Valor = valor;
         FormaPagamento = formaPagamento;
-        Categorias = categorias;
+        // Categorias = categorias;
         DataOcorrencia = DateTime.Now;
-        Categorias = categorias;
     }
 
     public override void Atualizar(Despesas despesaAtualizada)
@@ -38,7 +37,7 @@ public class Despesas : EntidadeBase<Despesas>
         DataOcorrencia = despesaAtualizada.DataOcorrencia;
         Valor = despesaAtualizada.Valor;
         FormaPagamento = despesaAtualizada.FormaPagamento;
-        Categorias = despesaAtualizada.Categorias;
+        // Categorias = despesaAtualizada.Categorias;
     }
 
     public override List<string> Validar()
@@ -51,8 +50,8 @@ public class Despesas : EntidadeBase<Despesas>
         if (Valor <= 0)
             erros.Add("O valor deve ser maior que zero.");
 
-        if (Categorias == null || Categorias.Count == 0)
-            erros.Add("Selecione pelo menos uma categoria.");
+        // if (Categorias == null || Categorias.Count == 0)
+        //     erros.Add("Selecione pelo menos uma categoria.");
 
         return erros;
     }

@@ -8,7 +8,7 @@ namespace EAgendaWeb.WebApp.Modulos.ModuloDespesas.Infra;
 public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFactory) : IRepositorioDespesa
 {
     private const string InserirSql = """
-        INSERT INTO dbo.TBDespesas
+        INSERT INTO dbo.TBDespesa
         (
             Id,
             Descricao,
@@ -27,7 +27,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
     """;
 
     private const string AtualizarSql = """
-        UPDATE dbo.TBDespesas
+        UPDATE dbo.TBDespesa
         SET
             Descricao = @Descricao,
             DataOcorrencia = @DataOcorrencia,
@@ -37,7 +37,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
     """;
 
     private const string ExcluirSql = """
-        DELETE FROM dbo.TBDespesas
+        DELETE FROM dbo.TBDespesa
         WHERE Id = @Id;
     """;
 
@@ -48,7 +48,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
             DataOcorrencia,
             Valor,
             FormaPagamento
-        FROM dbo.TBDespesas
+        FROM dbo.TBDespesa
         WHERE Id = @Id;
     """;
 
@@ -59,7 +59,7 @@ public sealed class RepositorioDespesaEmSql(ISqlConnectionFactory connectionFact
             DataOcorrencia,
             Valor,
             FormaPagamento
-        FROM dbo.TBDespesas
+        FROM dbo.TBDespesa
         ORDER BY DataOcorrencia DESC;
     """;
 

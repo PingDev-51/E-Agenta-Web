@@ -1,7 +1,6 @@
 using FluentResults;
 using eAgenda.WebApp.Modulos.ModuloContato.Dominio;
 using eAgenda.WebApp.Compartilhado.Aplicacao;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 
 namespace eAgenda.WebApp.Modulos.ModuloContato.Aplicacao;

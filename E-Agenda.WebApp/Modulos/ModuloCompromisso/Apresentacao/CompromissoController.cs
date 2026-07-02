@@ -4,7 +4,6 @@ using eAgenda.WebApp.Compartilhado.Apresentacao.Extensions;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 using Microsoft.AspNetCore.Mvc;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 
 namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Apresentacao;
 

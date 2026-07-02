@@ -1,4 +1,3 @@
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 using eAgenda.WebApp.Compartilhado.Infra.Sql;
 using eAgenda.WebApp.Modulos.ModuloCategoria.Dominio;
 using eAgenda.WebApp.Modulos.ModuloCategoria.Infra;

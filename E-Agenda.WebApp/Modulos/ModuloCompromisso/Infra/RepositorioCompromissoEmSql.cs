@@ -1,5 +1,4 @@
 using Dapper;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 using eAgenda.WebApp.Compartilhado.Infra.Sql;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 using eAgenda.WebApp.Modulos.ModuloContato.Dominio;

@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 

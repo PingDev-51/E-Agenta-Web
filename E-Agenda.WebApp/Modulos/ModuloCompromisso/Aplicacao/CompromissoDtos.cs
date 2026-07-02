@@ -1,4 +1,3 @@
-using E_Agenda.WebApp.Modulos.ModuloCompromissos.Dominio;
 using eAgenda.WebApp.Modulos.ModuloCompromisso.Dominio;
 
 namespace eAgenda.WebApp.Modulos.ModuloCompromisso.Aplicacao;

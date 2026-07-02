@@ -38,20 +38,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcGFydGlsaGFkb1xBcHJlc2VudGFjYW9cVmlld3NcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromissos/Apresentacao/Views/Cadastrar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb3NcQXByZXNlbnRhY2FvXFZpZXdzXENhZGFzdHJhci5jc2h0bWw=
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCategoria/Apresentacao/Views/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9DYXRlZ29yaWFcQXByZXNlbnRhY2FvXFZpZXdzXENhZGFzdHJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromissos/Apresentacao/Views/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb3NcQXByZXNlbnRhY2FvXFZpZXdzXEVkaXRhci5jc2h0bWw=
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCategoria/Apresentacao/Views/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9DYXRlZ29yaWFcQXByZXNlbnRhY2FvXFZpZXdzXEVkaXRhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromissos/Apresentacao/Views/Excluir.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb3NcQXByZXNlbnRhY2FvXFZpZXdzXEV4Y2x1aXIuY3NodG1s
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCategoria/Apresentacao/Views/Excluir.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9DYXRlZ29yaWFcQXByZXNlbnRhY2FvXFZpZXdzXEV4Y2x1aXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromissos/Apresentacao/Views/Listar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb3NcQXByZXNlbnRhY2FvXFZpZXdzXExpc3Rhci5jc2h0bWw=
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCategoria/Apresentacao/Views/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9DYXRlZ29yaWFcQXByZXNlbnRhY2FvXFZpZXdzXExpc3Rhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromisso/Apresentacao/Views/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb1xBcHJlc2VudGFjYW9cVmlld3NcQ2FkYXN0cmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromisso/Apresentacao/Views/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb1xBcHJlc2VudGFjYW9cVmlld3NcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromisso/Apresentacao/Views/Excluir.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb1xBcHJlc2VudGFjYW9cVmlld3NcRXhjbHVpci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloCompromisso/Apresentacao/Views/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db21wcm9taXNzb1xBcHJlc2VudGFjYW9cVmlld3NcTGlzdGFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloContato/Apresentacao/Views/Cadastrar.cshtml]
@@ -70,24 +86,40 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9Db250YXRvXEFwcmVzZW50YWNhb1xWaWV3c1xMaXN0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesas/Apresentacao/Views/Cadastrar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhc1xBcHJlc2VudGFjYW9cVmlld3NcQ2FkYXN0cmFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesa/Apresentacao/Views/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhXEFwcmVzZW50YWNhb1xWaWV3c1xDYWRhc3RyYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesas/Apresentacao/Views/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhc1xBcHJlc2VudGFjYW9cVmlld3NcRWRpdGFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesa/Apresentacao/Views/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhXEFwcmVzZW50YWNhb1xWaWV3c1xFZGl0YXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesas/Apresentacao/Views/Excluir.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhc1xBcHJlc2VudGFjYW9cVmlld3NcRXhjbHVpci5jc2h0bWw=
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesa/Apresentacao/Views/Excluir.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhXEFwcmVzZW50YWNhb1xWaWV3c1xFeGNsdWlyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesas/Apresentacao/Views/Listar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhc1xBcHJlc2VudGFjYW9cVmlld3NcTGlzdGFyLmNzaHRtbA==
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloDespesa/Apresentacao/Views/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9EZXNwZXNhXEFwcmVzZW50YWNhb1xWaWV3c1xMaXN0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXENhZGFzdHJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/Excluir.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXEV4Y2x1aXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/GerenciarItens.cshtml]
 build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXEdlcmVuY2lhckl0ZW5zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/Listar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = TW9kdWxvc1xNb2R1bG9UYXJlZmFcQXByZXNlbnRhY2FvXFZpZXdzXExpc3Rhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E-Agenda.WebApp/Modulos/ModuloTarefa/Apresentacao/Views/_TarefaCard.cshtml]

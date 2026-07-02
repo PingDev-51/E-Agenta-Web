@@ -42,27 +42,22 @@ else
                             <dd class="col-7 mb-0">@c.HoraInicio.ToString(@"hh\:mm") - @c.HoraTermino.ToString(@"hh\:mm")</dd>
 
                             <dt class="col-5 text-secondary fw-semibold">Contato</dt>
-                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.ContatoNome) ? "Não informado" :
-                                                        c.ContatoNome)</dd>
+                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.ContatoNome) ? "Não informado" : c.ContatoNome)</dd>
 
-                                <dt class="col-5 text-secondary fw-semibold">Local</dt>
-                                <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Local) ? "Não informado" : c.Local)
-                                </dd>
+                            <dt class="col-5 text-secondary fw-semibold">Local</dt>
+                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Local) ? "Não informado" : c.Local)</dd>
 
-                                <dt class="col-5 text-secondary fw-semibold">Link</dt>
-                                <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Link) ? "Não informado" : c.Link)
-                                </dd>
-                            </dl>
+                            <dt class="col-5 text-secondary fw-semibold">Link</dt>
+                            <dd class="col-7 mb-0 text-break">@(string.IsNullOrWhiteSpace(c.Link) ? "Não informado" : c.Link)</dd>
+                        </dl>
 
-                            <div class="d-flex flex-wrap gap-2 mt-auto justify-content-end">
-                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
-                                   asp-route-id="@c.Id">Editar</a>
-                                <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
-                                   asp-route-id="@c.Id">Excluir</a>
-                            </div>
+                        <div class="d-flex flex-wrap gap-2 mt-auto justify-content-end">
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar" asp-route-id="@c.Id">Editar</a>
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir" asp-route-id="@c.Id">Excluir</a>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
-    }
+            </div>
+        }
+    </div>
+}

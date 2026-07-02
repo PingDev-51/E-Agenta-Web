@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "E-Agenda.slnx"
+  "dotnet.defaultSolution": "E-Agenda.slnx",
+  "dataworkspace.excludedProjects": [
+    "eAgenda.Database/E_AgendaDb/E_AgendaDb.sqlproj"
+  ]
 }

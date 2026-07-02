@@ -38,6 +38,25 @@
 				"isDefault": true
 			},
 			"detail": "Builds the E-AgendaDB SQL project"
+		},
+		{
+			"label": "sqlproj: Build E_Agenda.DataBase",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"c:/Users/kauan/Documents/Academia-Do-Programador-FullStack/Atividades/E-Agenda2026/E_Agenda.DataBase/E_Agenda.DataBase.sqlproj",
+				"/p:NetCoreBuild=true",
+				"/p:NETCoreTargetsPath=c:/Users/kauan/.vscode/extensions/ms-mssql.sql-database-projects-vscode-1.6.1/BuildDirectory",
+				"/p:SystemDacpacsLocation=c:/Users/kauan/.vscode/extensions/ms-mssql.sql-database-projects-vscode-1.6.1/BuildDirectory"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"detail": "Builds the E_Agenda.DataBase SQL project"
 		}
 	]
 }

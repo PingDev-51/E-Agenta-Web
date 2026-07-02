@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b53c5921f51f009be1e3ec060ce073dc0f2479a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a75c6b5b6a86df56e4d32b845393c51d402e35f")]
 [assembly: System.Reflection.AssemblyProductAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

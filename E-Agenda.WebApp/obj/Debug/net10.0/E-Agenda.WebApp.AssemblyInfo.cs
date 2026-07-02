@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("e84b76ae-1058-491f-9090-4ee342fcb6fd")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a75c6b5b6a86df56e4d32b845393c51d402e35f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e393e3f9aa470aae884280f33dfa53b6c1b8eca2")]
 [assembly: System.Reflection.AssemblyProductAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E-Agenda.WebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
